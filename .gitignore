@@ -22,3 +22,7 @@ Project/.vs/Project/v17/Browse.VC.opendb
 *.opendb
 *.db-wal
 *.db-shm
+PakMan/.vs/PakMan/v17/.suo
+PakMan/desktop.ini
+PakMan/PakMan.sln
+PakMan/Debug/PakMan.vcxproj.FileListAbsolute.txt
