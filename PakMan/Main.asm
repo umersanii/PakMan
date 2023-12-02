@@ -8,63 +8,53 @@ LEFTARROW BYTE 4Bh
 RIGHTARROW BYTE 4Dh
 UPARROW BYTE 48h
 
-r1 BYTE "--",0
-r2 BYTE "||",0
-r3 BYTE "||",0
-r4 BYTE "|     |   ",0
-r5 BYTE "|     |   ",0
-r6 BYTE "|     |   ",0
-r7 BYTE "|     |   ",0
-r8 BYTE " ---------",0
+boolWallCollison db 0
 
-RboardArray db  '---------',
-				'|       |',
-				'|       |',
-				'|     |   ',
-				'|     |   ',
-				'|     |   ',
+;		  1	2 3 4 5 6 7 8 9 101112131415161718
+row1  db "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #", 0
+row2  db "#                                                                                   #", 0
+row3  db "#       # # # # # # # # # # # # #                 # # # # # # # # # # # # #         #", 0
+row4  db "#       # . . . . . # . . . . . #                 # . . . . . . . . . . . #         #", 0
+row5  db "#       # . . . . . # . . . . . #                 # . . . . . . . . . . . #         #", 0
+row6  db "#       # . . . . . # . . . . . #                 # . . # # # # # # # . . #         #", 0
+row7  db "#       # . . . . . # . . . . . #                 # . . #    . .    # . . #         #", 0
+row8  db "#       # . . . . . # . . . . . #                 # . . #    . .    # . . #         #", 0
+row9  db "#       # . . . . . # . . . . . #                 # . . #    . .    # . . #         #", 0
+row10 db "#       # . . . . . # . . . . . #                 # . . #    . .    # . . #         #", 0
+row11 db "#       # . . . . . # . . . . . #                 # . . #    . .    # . . #         #", 0
+row12 db "#                                                                                   #", 0
+row13 db "#                                                                                   #", 0
+row14 db "#                            # .   . #  . .  # .   . #                              #", 0
+row15 db "#                            # .   . #  . .  # .   . #                              #", 0
+row16 db "#                            # .   . #  . .  # .   . #                              #", 0
+row17 db "#                            # .   . #  . .  # .   . #                              #", 0
+row18 db "#                            # .   . #  . .  # .   . #                              #", 0
+row19 db "#                            # .   . #  . .  # .   . #                              #", 0
+row20 db "#                            # .   . #  . .  # .   . #                              #", 0
+row21 db "#                            # .   . #  . .  # .   . #                              #", 0
+row22 db "#                            # .   . #  . .  # .   . #                              #", 0
+row23 db "#                            # # # # # # # # # # # # #                              #", 0
+row24 db "#                                                                                   #", 0
+row25 db "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #", 0
+dot db ".", 0
 
-row1 db "---------",0
-row2 db "|       |",0
-row3 db "|       |",0
+foodx1 db 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
+foodx2 db 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6
+foodx3 db 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9
+foodx4 db 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 13, 13, 13, 13
+foodx5 db 13, 13, 14, 14, 14, 14, 14, 14, 15, 15, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16, 17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 19, 19, 19 
+foodx6 db 19, 19, 19, 20, 20, 20, 20, 20, 20, 21, 21, 21, 21, 21, 21
 
-;row1  db "# # # # # # # # # # # # # # # # # # # # # # # # # # # #",0
-;row2  db "# . . . . . . . . . . . . # # . . . . . . . . . . . . #",0  
-;row3  db "# . # # # # . # # # # # . # # . # # # # # . # # # # . #",0  
-row4  db "# o # # # # . # # # # # . # # . # # # # # . # # # # o #",0  
-row5  db "# . # # # # . # # # # # . # # . # # # # # . # # # # . #   |    -              |",0  ;64 for current score
-row6  db "# . . . . . . . . . . . . . . . . . . . . . . . . . . #   |___________________|",0  
-row7  db "# . # # # # . # # . # # # # # # # # . # # . # # # # . #   |                   |",0  
-row8  db "# . # # # # . # # . # # # # # # # # . # # . # # # # . #   |  <Level Scores>   |",0  
-row9  db "# . . . . . . # # . . . . # # . . . . # # . . . . . . #   |                   |",0  
-row10 db "# # # # # # . # # # # #   # #   # # # # # . # # # # # #   |   1:              |",0  ;64 for past scores
-row11 db "# # # # # # . # # # # #   # #   # # # # # . # # # # # #   |   2:              |",0  
-row12 db "# # # # # # . # #                     # # . # # # # # #   |   3:              |",0  
-row13 db "# # # # # # . # #   # # # - - # # #   # # . # # # # # #   |   4:              |",0  
-row14 db "# # # # # # . # #   #             #   # # . # # # # # #   |   5:              |",0  
-row15 db "            .       #             #       .               |   6:              |",0  
-row16 db "# # # # # # . # #   #             #   # # . # # # # # #   |   7:              |",0  
-row17 db "# # # # # # . # #   # # # # # # # #   # # . # # # # # #   |   8:              |",0  
-row18 db "# # # # # # . # #                     # # . # # # # # #   |   9:              |",0  
-row19 db "# # # # # # . # #   # # # # # # # #   # # . # # # # # #   |  10:              |",0 
-row20 db "# # # # # # . # #   # # # # # # # #   # # . # # # # # #   |  11:              |",0  
-row21 db "# . . . . . . . . . . . . # # . . . . . . . . . . . . #   |  12:              |",0  
-row22 db "# . # # # # . # # # # # . # # . # # # # # . # # # # . #   |  13:              |",0  
-row23 db "# . # # # # . # # # # # . # # . # # # # # . # # # # . #   |  14:              |",0  
-row24 db "# o . . # # . . . . . . .     . . . . . . . # # . . o #   |  15:              |",0  
-row25 db "# # # . # # . # # . # # # # # # # # . # # . # # . # # #   |___________________|",0  
-row26 db "# # # . # # . # # . # # # # # # # # . # # . # # . # # #   |      <Lives>      |",0  
-row27 db "# . . . . . . # # . . . . . . . . . . # # . . . . . . #   |       < < <       |",0 
-row28 db "# . # # # # # # # # # # . # # . # # # # # # # # # # . #   |___________________|",0 
-row29 db "# . # # # # # # # # # # . # # . # # # # # # # # # # . #   |   <High Score>    |",0  ;64 for High score
-row30 db "# . . . . . . . . . . . . . . . . . . . . . . . . . . #   |    -              |",0 
-row31 db "# # # # # # # # # # # # # # # # # # # # # # # # # # # #   |___________________|",0 
-
-				
-
+foody1 db 10, 12, 14, 16, 18, 22, 24, 26, 28, 30, 52, 54, 56, 58, 60, 62, 64, 66, 68, 70
+foody2 db 72, 10, 12, 14, 16, 18, 22, 24, 26, 28, 30, 52, 54, 56, 58, 60, 62, 64, 66, 68, 70, 72, 10, 12, 14, 16, 18, 22, 24, 26, 28, 30, 52, 54, 70
+foody3 db 72, 10, 12, 14, 16, 18, 22, 24, 26, 28, 30, 52, 54, 61, 63, 70, 72, 10, 12, 14, 16, 18, 22, 24, 26, 28, 30, 52, 54, 61, 63, 70, 72, 10, 12
+foody4 db 14, 16, 18, 22, 24, 26, 28, 30, 52, 54, 61, 63, 70, 72, 10, 12, 14, 16, 18, 22, 24, 26, 28, 30, 52, 54, 61, 63, 70, 72, 10, 12, 14, 16, 18 
+foody5 db 22, 24, 26, 28, 30, 52, 54, 61, 63, 70, 72, 31, 35, 40, 42, 47, 51, 31, 35, 40, 42, 47, 51, 31, 35, 40, 42, 47, 51, 31, 35, 40, 42, 47, 51
+foody6 db 31, 35, 40, 42, 47, 51, 31, 35, 40, 42, 47, 51, 31, 35, 40, 42, 47, 51, 31, 35, 40, 42, 47, 51, 31, 35, 40, 42, 47, 51
 wall BYTE "|",0
 lastposx db 1
 lastposy db 0
+boolLastMove db 4
 
 outofboundsy db 5 dup(?) 
 outofboundsx db 5 dup(?) 
@@ -88,21 +78,7 @@ yCoinPos BYTE ?
 inputChar BYTE ?
 
 .code
-PrintBoard PROC
-	mov eax, 15
-	CALL SetTextColor
-	mov ecx, 31
-	mov edx, OFFSET row1 - 10
 
-	BoardLoop:
-		ADD edx, 10
-		CALL writestring
- 		CALL CRLF
-
-		Loop BoardLoop
-
-	RET 
-PrintBoard ENDP
 ;DrawBoundry PROC
 ;mov dl, al
 ;mov dh, ah
@@ -138,59 +114,46 @@ jmp ReturnFromOutOfBound
 ReturnFromOutOfBound:
 ret
 OutOfBound endp
+
+PrintBoard PROC
+	mov eax, 15
+	CALL SetTextColor
+	mov ecx, 25
+	mov edx, OFFSET row1 - 86
+
+	BoardLoop:
+		ADD edx, 86
+		CALL writestring
+		CALL CRLF
+
+		Loop BoardLoop
+
+		
+
+	mov eax, red + (black* 16)
+    call SetTextColor
+	mov dl, 25
+	mov dh, 2
+	CALL GoToXY
+	mov edx, Offset dot
+	CALL writestring
+		CALL CRLF
+
+	RET 
+
+PrintBoard ENDP
+
+
 main PROC
 	call PrintBoard
-    ; Set text color
-    mov eax, Black + (White * 16)
-    call SetTextColor
-
-    ; Clear the screen
-    call clrscr
-
-    ; Draw ground at (0,29)
-    mov dl, 0
-    mov dh, 0
-    call Gotoxy
-   ; mov edx, OFFSET ground
-    call WriteString
-    mov al, 0
-    mov ecx, 29
-;LOOP1:
- ;   inc ah
-  ;  mov bl, vertical
-   ; call DrawBoundry
-;loop LOOP1
-
-	mov ecx, 5
-	xor esi, esi
-	xor edi, edi
-Loop2:
-	mov eax, 80
-	call RandomRange
-	mov dl, al
-	mov outofboundsy[esi], dl
-	mov eax, 25
-	call RandomRange
-	mov dh, BYTE PTR al
-	mov outofboundsx[esi], dh
-
-    call Gotoxy
-    mov edx, OFFSET wall
-    call WriteString
-	inc esi
-	inc edi
-loop Loop2
+   
 
     
 	call DrawPlayer
 
-	call CreateRandomCoin
-	call DrawCoin
-
-	call Randomize
 
 	gameLoop:
-	mov eax, 500
+	mov eax, 100
 	call delay
 			
 	
@@ -200,6 +163,7 @@ loop Loop2
 	mov eax, 0
 	push edx
 	CALL ReadKey	;This is what causes continuous movement
+
 	pop edx
 
 	CMP ah, UPARROW
@@ -213,12 +177,11 @@ loop Loop2
 	jmp DeltaLast
 
 	DeltaUp:
-		
+		mov boolLastMove, 1
 		mov dh, yPos
 		mov dl, xPos
 		CALL GoToXY
-				CALL UpdatePlayer
-
+		CALL UpdatePlayer
 		dec yPos
 		mov dh, yPos
 		CALL GoToXY
@@ -231,13 +194,16 @@ loop Loop2
 
 	
 	DeltaDown:
+		mov boolLastMove, 3
 		
 		mov dh, yPos
 		mov dl, xPos
 		CALL GoToXY
-				CALL UpdatePlayer
-
+		CALL UpdatePlayer
+		cmp ypos, 23
+		jge temp
 		inc yPos
+		temp:
 		mov dh, yPos
 		CALL GoToXY
 		mov lastposy, 1
@@ -251,7 +217,7 @@ loop Loop2
 	
 
 	DeltaLeft:
-
+		mov boolLastMove, 2
 		mov dh, yPos
 		mov dl, xPos
 		CALL GoToXY
@@ -260,41 +226,69 @@ loop Loop2
 		SUB xPos, 2
 		mov dl, xPos
 		CALL GoToXY
-		mov lastposy, -1
-		mov lastposx, 0
+		mov lastposy, 0
+		mov lastposx, -1
 		call DrawPlayer
 
 	call gameloop
 	
 	
 	DeltaRight:
-		
+		mov boolLastMove, 4
+		cmp boolWallCollison, 1
 		mov dh, yPos
 		mov dl, xPos
 		CALL GoToXY
-				CALL UpdatePlayer
-
+		CALL UpdatePlayer
 		ADD xPos,2
 		mov dl, xPos
 		CALL GoToXY
 		mov lastposy, 0
 		mov lastposx, 1
 		call DrawPlayer
-	call gameloop
+		call gameloop
 		
 	
 	DeltaLast:
-	
+
 		mov dl, xPos
 		mov dh, yPos
 		CALL GoToXY
+		CALL UpdatePlayer
+		cmp boolLastMove, 1
+		je LastMoveWasUp
+		cmp boolLastMove, 2
+		je LastMoveWasLeft
+		cmp boolLastMove, 3
+		je LastMoveWasDown
+		cmp boolLastMove, 4
+		je LastMoveWasRight
+	LastMoveWasDown:
+		cmp ypos, 23
+		jge temp1
+		jmp elseDelta
+	LastMoveWasUp:
+		cmp ypos, 1
+		jle temp1
+		jmp elseDelta
 
-				CALL UpdatePlayer
+	LastMoveWasRight:
+		cmp xpos,  83
+		jge temp1
+		jmp elseDelta
+
+	LastMoveWasLeft:
+		mov ah, xpos
+		cmp xpos, 1
+		jle temp1
+		jmp elseDelta
+	elseDelta:
 
 		mov dl, lastposy
 		mov dh, lastposx
 		add xPos, dh
 		add yPos, dl
+		temp1:
 		mov dl, xPos
 		mov dh, yPos
 		CALL GoToXY
@@ -306,12 +300,16 @@ loop Loop2
 
 	call gameloop
 
+	
 	exitGame:
 	exit
 main ENDP
 
 DrawPlayer PROC
 	; draw player at (xPos,yPos):
+	 mov eax, Green + (Black* 16)
+    call SetTextColor
+
 	mov dl,xPos
 	mov dh,yPos
 	call Gotoxy
@@ -324,7 +322,7 @@ UpdatePlayer PROC
 	mov dl,xPos
 	mov dh,yPos
 	call Gotoxy
-	 mov eax, Black + (White * 16)
+	 mov eax, White + (Black* 16)
     call SetTextColor
 	mov al," "
 	call WriteChar
