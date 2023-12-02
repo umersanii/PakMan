@@ -51,6 +51,8 @@ foody3 db 72, 10, 12, 14, 16, 18, 22, 24, 26, 28, 30, 52, 54, 61, 63, 70, 72, 10
 foody4 db 14, 16, 18, 22, 24, 26, 28, 30, 52, 54, 61, 63, 70, 72, 10, 12, 14, 16, 18, 22, 24, 26, 28, 30, 52, 54, 61, 63, 70, 72, 10, 12, 14, 16, 18 
 foody5 db 22, 24, 26, 28, 30, 52, 54, 61, 63, 70, 72, 31, 35, 40, 42, 47, 51, 31, 35, 40, 42, 47, 51, 31, 35, 40, 42, 47, 51, 31, 35, 40, 42, 47, 51
 foody6 db 31, 35, 40, 42, 47, 51, 31, 35, 40, 42, 47, 51, 31, 35, 40, 42, 47, 51, 31, 35, 40, 42, 47, 51, 31, 35, 40, 42, 47, 51
+
+foodcountlv1 db 190
 wall BYTE "|",0
 lastposx db 1
 lastposy db 0
@@ -129,24 +131,47 @@ PrintBoard PROC
 		Loop BoardLoop
 
 		
-
-	mov eax, red + (black* 16)
-    call SetTextColor
-	mov dl, 25
-	mov dh, 2
-	CALL GoToXY
-	mov edx, Offset dot
-	CALL writestring
-		CALL CRLF
+	
+		
 
 	RET 
 
 PrintBoard ENDP
+PrintDots PROC
+xor esi, esi
+mov cl,foodcountlv1
+push Offset foodx1 - 1
+push Offset foody1 - 1
+mov eax, yellow+ (black* 16)
+    call SetTextColor
+DotsLoop:
+pop eax
+add eax, 1
+mov dl, [eax]
+mov ebx, eax
+pop eax
+add eax, 1
+mov dh, [eax]
+call gotoxy
+mov edx, Offset dot
+CALL writestring
+push eax
+push ebx
+cmp ecx, 0
+je yes
+Loop DotsLoop
 
+yes:
+pop eax
+pop eax
+ret 
+Loop DotsLoop
+ret - 8
+PrintDots endp
 
 main PROC
 	call PrintBoard
-   
+	call PrintDots
 
     
 	call DrawPlayer
