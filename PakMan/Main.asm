@@ -110,8 +110,8 @@ outofboundsx db 5 dup(?)
 strScore BYTE "Your score is: ",0
 score BYTE 0
 
-xPos BYTE 3
-yPos BYTE 10
+xPos BYTE 7
+yPos BYTE 2
 
    MIN_X equ 1
     MIN_Y equ 1
@@ -263,43 +263,37 @@ isFood endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 isWall PROC
 	xor ecx, ecx
-    mov cl, brickcountlv1
+    mov ecx, 0
     mov esi, 0  
-	mov eax, Offset r1
-	mov edx, eax
-	;call writestring
-	;cmp [eax], '#'
-	je yes2
-	add eax,  8
-	add eax , 2
-	mov ebx, [eax]
-	yes2:
-	mov edx, Offset wally1 - 1 ; esi for loop counter
-	; esi for loop counter
+	mov eax, Offset wallx1 - 1
+	mov edx, Offset wally1 - 1 
 
 WallLoop:
-    cmp esi, DWORD PTR brickcountlv1
-    je  endWall; Exit loop if all food items checked
+    cmp cl, brickcountlv1
+    je  endWall   
 	add eax, 1
 	add edx, 1
-
-    mov bh, xpos
-    cmp bh, [eax]
+    mov bh, ypos
+	mov bl, [eax]
+    cmp bh, bl
     je  ifWall
+continueWall:
 
-    inc esi
+    inc ecx
     jmp WallLoop
 
 ifWall:
-    mov bl, ypos
-    cmp bl, [edx]
+    mov bh, xpos
+    mov bl, [edx]
+	
+
+    cmp bl, bh
+
     je  elseifWall
     jmp continueWall
 
 elseifWall:
     mov boolisWall, 1
-
-continueWall:
     jmp endWall
 
 endWall:
@@ -342,32 +336,36 @@ main PROC
 	jmp DeltaLast
 
 	DeltaUp:
-		;call isFood
+		call isFood
 		mov boolLastMove, 1
 		mov dh, yPos
 		mov dl, xPos
 		CALL GoToXY
 		CALL UpdatePlayer
+
+		dec dh
 		dec yPos
 		mov boolisWall, 0
 		call isWall
 		cmp boolisWall, 1
 		je DeltaUpBack
+
 		DeltaUpContinue:
-		mov dh, yPos
+		
 		CALL GoToXY
 		mov lastposy, -1
 		mov lastposx, 0
 		
 
 		call DrawPlayer
-	call gameloop
+		call gameloop
 	DeltaUpBack:
+		inc dh
 		inc yPos
 		jmp DeltaUpContinue
 	
 	DeltaDown:
-		;call isFood
+		call isFood
 
 		mov boolLastMove, 3
 		
@@ -375,20 +373,26 @@ main PROC
 		mov dl, xPos
 		CALL GoToXY
 		CALL UpdatePlayer
-		cmp ypos, 23
-		jge temp
+		
 		inc yPos
-		temp:
-		mov dh, yPos
+		inc dh
+		mov boolisWall, 0
+		
+		call isWall
+		cmp boolisWall, 1
+		je DeltaDownBack
+		DeltaDownContinue:
+
 		CALL GoToXY
 		mov lastposy, 1
 		mov lastposx, 0
-
-
 		call DrawPlayer
-	call gameloop
+		call gameloop
 				
-
+		DeltaDownBack:
+		dec dh
+		dec Ypos
+		jmp DeltaDownContinue
 	
 
 	DeltaLeft:
@@ -398,38 +402,62 @@ main PROC
 		mov dh, yPos
 		mov dl, xPos
 		CALL GoToXY
-				CALL UpdatePlayer
+		CALL UpdatePlayer
 
-		SUB xPos, 2
+		dec dl
+		SUB xPos, 1
+
+		mov boolisWall, 0
+		call isWall
+		cmp boolisWall, 1
+		je DeltaLeftBack
+		DeltaLeftContinue:
+
 		mov dl, xPos
 		CALL GoToXY
 		mov lastposy, 0
 		mov lastposx, -1
 		call DrawPlayer
+		call gameloop
+	
+	DeltaLeftBack:
+		inc xPos
+		inc dl
 
-	call gameloop
-	
-	
+		jmp DeltaLeftContinue
+
 	DeltaRight:
-		;call isFood
+		call isFood
 		mov boolLastMove, 4
 		cmp boolWallCollison, 1
 		mov dh, yPos
 		mov dl, xPos
 		CALL GoToXY
 		CALL UpdatePlayer
-		ADD xPos,2
+
+		inc dl
+		ADD xPos, 1
+
+		mov boolisWall, 0
+		call isWall
+		cmp boolisWall, 1
+		je DeltaRightBack
+		DeltaRightContinue:
+
 		mov dl, xPos
 		CALL GoToXY
 		mov lastposy, 0
 		mov lastposx, 1
 		call DrawPlayer
 		call gameloop
-		
+	DeltaRightBack:
+		dec xPos
+		dec dl
+
+		jmp DeltaRightContinue	
 	
 	DeltaLast:
 		call isFood
-		call isWall
 
 		mov dl, xPos
 		mov dh, yPos
@@ -445,22 +473,22 @@ main PROC
 		je LastMoveWasRight
 	LastMoveWasDown:
 		cmp ypos, 23
-		jge temp1
+		jge continueElseDelta
 		jmp elseDelta
 	LastMoveWasUp:
 		cmp ypos, 1
-		jle temp1
+		jle continueElseDelta
 		jmp elseDelta
 
 	LastMoveWasRight:
 		cmp xpos,  83
-		jge temp1
+		jge continueElseDelta
 		jmp elseDelta
 
 	LastMoveWasLeft:
 		mov ah, xpos
 		cmp xpos, 1
-		jle temp1
+		jle continueElseDelta
 		jmp elseDelta
 	elseDelta:
 
@@ -468,7 +496,15 @@ main PROC
 		mov dh, lastposx
 		add xPos, dh
 		add yPos, dl
-		temp1:
+		
+		
+		mov boolisWall, 0
+		call isWall
+		cmp boolisWall, 1
+		je DeltaElseBack
+
+		
+		continueElseDelta:
 		mov dl, xPos
 		mov dh, yPos
 		CALL GoToXY
@@ -476,8 +512,13 @@ main PROC
 		call gameloop
 
 
-	
+	DeltaElseBack:
 
+	mov dl, lastposy
+		mov dh, lastposx
+		sub xPos, dh
+		sub yPos, dl
+		jmp continueElseDelta
 
 	
 
@@ -491,7 +532,7 @@ DrawPlayer PROC
 	mov dl,xPos
 	mov dh,yPos
 	call Gotoxy
-	mov al,"O"
+	mov al,"&"
 	call WriteChar
 	ret
 DrawPlayer ENDP
