@@ -37,6 +37,8 @@ row23 db "#                            # # # # # # # # # # # # #                
 row24 db "#                                                                                   #", 0
 row25 db "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #", 0
 
+StringLvl db "Level 01 : In the beninging", 0
+
 
 
 dot db ".", 0
@@ -87,8 +89,8 @@ outofboundsx db 5 dup(?)
 strScore BYTE "Your score is: ",0
 score BYTE 0
 
-xPos BYTE 7
-yPos BYTE 8
+xPos BYTE 10
+yPos BYTE 4
 
    MIN_X equ 1
     MIN_Y equ 1
@@ -209,9 +211,8 @@ FoodLoop:
     je  endFood      ; Exit loop if all food items checked
 	add eax, 1
 	add edx, 1
-    mov bh, xpos
+    mov bh, ypos
 	mov bl, [eax]
-	dec bl
     cmp bh, bl
     je  ifFood
 continueFood:
@@ -220,10 +221,9 @@ continueFood:
     jmp FoodLoop
 
 ifFood:
-    mov bh, ypos
+    mov bh, xpos
     mov bl, [edx]
 	dec bl
-
     cmp bl, bh
 
     je  elseifFood
@@ -283,7 +283,12 @@ isWall endp
 main PROC
 	call PrintBoard
 	call PrintDots
-
+	mov dl, 28
+	mov dh, 25
+	call gotoxy
+	mov edx, Offset Stringlvl
+	call WriteString
+	
     
 	call DrawPlayer
 
@@ -291,7 +296,11 @@ main PROC
 	gameLoop:
 	mov eax, 100
 	call delay
-			
+	mov dl, 0
+	mov dh, 25
+	call gotoxy
+	mov al, scorecounter
+	call WriteDec
 	
 	mov dl, xPos
 	mov dh, yPos
