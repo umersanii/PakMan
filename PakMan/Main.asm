@@ -38,8 +38,9 @@ row24 db "#                                                                     
 row25 db "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #", 0
 
 StringLvl db "Level 01 : In the beninging", 0
-
-
+xUI db "|                      |", 0
+yUI db " ----------------------", 0
+xyUI db "|----------------------|", 0
 
 dot db ".", 0
 
@@ -99,7 +100,7 @@ outofboundsx db 5 dup(?)
 
 
 
-strScore BYTE "Your score is: ",0
+strxUI BYTE "Previous Pak-Men",0
 score BYTE 0
 
 xPos BYTE 10
@@ -154,8 +155,8 @@ ret
 OutOfBound endp
 
 PrintBoard PROC
-	mov eax, 15
-	CALL SetTextColor
+	mov eax, blue+ (black* 16)
+    call SetTextColor
 	mov ecx, 25
 	mov edx, OFFSET row1 - 86
 
@@ -173,6 +174,72 @@ PrintBoard PROC
 	RET 
 
 PrintBoard ENDP
+
+PrintxUI PROC
+	mov eax, white+ (black* 16)
+    call SetTextColor
+
+	mov dh, 1
+	mov dl, 88
+	call gotoxy
+	mov edx, OFFSET yUI
+	call writestring
+
+	mov ecx, 3
+	mov dh, 2
+	xor ebx, ebx
+
+	mov bl, 88
+	mov dl, 88
+	mov bh, 2
+	xUILoop1:
+		mov dh, bh
+		mov dl, bl
+		call gotoxy
+		mov edx, OFFSET xUI
+		call writestring
+		inc bh
+		Loop xUILoop1
+
+	mov dh, 5
+	mov dl, 88
+	call gotoxy
+	mov edx, OFFSET xyUI
+	call writestring
+
+	mov ecx, 18
+	mov dh, 5
+	xor ebx, ebx
+
+	mov bl, 88
+	mov dl, 88
+	mov bh, 6
+	xUILoop2:
+		mov dh, bh
+		mov dl, bl
+		call gotoxy
+		mov edx, OFFSET xUI
+		call writestring
+		inc bh
+		Loop xUILoop2
+		
+	mov dh, 24
+	mov dl, 88
+	call gotoxy
+	mov edx, OFFSET yUI
+	call writestring
+	
+	mov dh, 3
+	mov dl, 92
+	call gotoxy
+	mov edx, OFFSET strxUI
+	call writestring
+
+		
+
+	RET 
+
+PrintxUI ENDP
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 PrintDots PROC
 xor esi, esi
@@ -304,6 +371,7 @@ main PROC
 	call gotoxy
 	mov edx, Offset Stringlvl
 	call WriteString
+	call PrintxUI
 	
     
 	call DrawPlayer
@@ -535,7 +603,7 @@ main ENDP
 
 DrawPlayer PROC
 	; draw player at (xPos,yPos):
-	 mov eax, Green + (Black* 16)
+	 mov eax, white + (Black* 16)
     call SetTextColor
 
 	mov dl,xPos
