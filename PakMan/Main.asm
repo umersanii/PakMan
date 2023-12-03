@@ -37,7 +37,7 @@ row23 db "#                            # # # # # # # # # # # # #                
 row24 db "#                                                                                   #", 0
 row25 db "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #", 0
 
-StringLvl db "Level 01 : In the beninging", 0
+StringLvl db "Level 01 : In the beninging                                                          ", 0
 xUI db "|                      |", 0
 yUI db " ----------------------", 0
 xyUI db "|----------------------|", 0
@@ -89,6 +89,7 @@ foodcountlv1 db 190
 brickcountlv1 db 174
 boolAteFood db 0
 boolisWall db 0
+lifecount db 3
 
 scorecounter db 0
 lastposx db 1
@@ -101,6 +102,7 @@ outofboundsx db 5 dup(?)
 
 
 strxUI BYTE "Previous Pak-Men",0
+stryUI db "& ",0
 score BYTE 0
 
 xPos BYTE 10
@@ -235,7 +237,26 @@ PrintxUI PROC
 	mov edx, OFFSET strxUI
 	call writestring
 
-		
+	mov eax, yellow+ (black* 16)
+    call SetTextColor
+	mov dl, 28
+	mov dh, 25
+	call gotoxy
+	mov edx, Offset Stringlvl
+	call writestring
+
+	mov eax, red+ (black* 16)
+    call SetTextColor
+	mov dl, 80
+	mov dh, 21
+	mov ecx, 3
+	HeartLoop:
+	
+	add dh, 4
+	call gotoxy
+	mov edx, Offset stryUI
+	call writestring
+	loop HeartLoop
 
 	RET 
 
@@ -366,10 +387,7 @@ isWall endp
 main PROC
 	call PrintBoard
 	call PrintDots
-	mov dl, 28
-	mov dh, 25
-	call gotoxy
-	mov edx, Offset Stringlvl
+
 	call WriteString
 	call PrintxUI
 	
