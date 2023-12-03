@@ -9,19 +9,36 @@ UPARROW BYTE 48h
 
 boolWallCollison db 0
 
-strtitle0 db "                                      the west has robinhood; we have           ",0
-strtitle1 db "                                      ______  ___   _   _____  ___  ___   _   _ ",0
-strtitle2 db "                                      | ___ \/ _ \ | | / /|  \/  | / _ \ | \ | |",0
-strtitle3 db "                                      | |_/ / /_\ \| |/ / | .  . |/ /_\ \|  \| |",0
-strtitle4 db "                                      |  __/|  _  ||    \ | |\/| ||  _  || . ` |",0
-strtitle5 db "                                      | |   | | | || |\  \| |  | || | | || |\  |",0
-strtitle6 db "                                      \_|   \_| |_/\_| \_/\_|  |_/\_| |_/\_| \_/",0
 
-strxyUI   db "										[E] Wiki/How to Play           [P] Play   ",0
+
+
+strtitle0 db "                                  who needs a pacman, when you have         ",0
+strtitle1 db "                                  ______  ___   _   _____  ___  ___   _   _ ",0
+strtitle2 db "                                  | ___ \/ _ \ | | / /|  \/  | / _ \ | \ | |",0
+strtitle3 db "                                  | |_/ / /_\ \| |/ / | .  . |/ /_\ \|  \| |",0
+strtitle4 db "                                  |  __/|  _  ||    \ | |\/| ||  _  || . ` |",0
+strtitle5 db "                                  | |   | | | || |\  \| |  | || | | || |\  |",0
+strtitle6 db "                                  \_|   \_| |_/\_| \_/\_|  |_/\_| |_/\_| \_/",0
+strtitle7 db "                                                                            ",0
+strtitle8 db "                                  [E] Wiki/How to Play              [P] Play",0
 
 
 strwiki1 db "Press Arrow Keys To Move",0
 strwiki2 db "Press Arrow Keys To Move",0
+wikir1 db "                                    About Game                                      ",0
+wikir2 db "                                                                                    ",0
+wikir3 db "       The Game is About a Robinhood type character who steals from the rich        ",0
+wikir4 db "                             and gives back to poor                                 ",0
+wikir5 db "                                                                                    ",0
+wikir6 db "                                                                                    ",0
+wikir7 db "                                    How to Play                                     ",0
+wikir8 db "                                                                                    ",0
+wikir9 db "                          Good Luck, Have Fun, Don't Die                            ",0
+wikir10 db "                                                                                   ",0
+wikir11 db "                      [E] TitleScreen              [P] Play                        ",0
+
+
+
 
 ;		  1	2 3 4 5 6 7 8 9 101112131415161718
 row1  db "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #", 0
@@ -49,6 +66,32 @@ row22 db "#                            # .   . #  . .  # .   . #                
 row23 db "#                            # # # # # # # # # # # # #                              #", 0
 row24 db "#                                                                                   #", 0
 row25 db "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #", 0
+
+l2row1  db "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #", 0
+l2row2  db "#                                                                                   #", 0
+l2row3  db "#                                                                                   #", 0
+l2row4  db "#         # # # #                     . . # . .                     # # # #         #", 0
+l2row5  db "#         # . . .                   . . . # . . .                   . . . #         #", 0
+l2row6  db "#         # . .                   . . . . # . . . .                   . . #         #", 0
+l2row7  db "#         # .       . #         . . . . . # . . . . .         # .       . #         #", 0
+l2row8  db "#                 . . #       . . . . . # # # . . . . .       # . .                 #", 0
+l2row9  db "#               . . . #     . . . . . . # # # . . . . . .     # . . .               #", 0
+l2row10 db "#               # # # #   . . . . . . . # # # . . . . . . .   # # # #               #", 0
+l2row11 db "#                       . . . . . . . . # # # . . . . . . . .                       #", 0
+l2row12 db "#                   # # # # # # # # # # # # # # # # # # # # # # #                   #", 0
+l2row13 db "#       # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #       #", 0
+l2row14 db "#                   # # # # # # # # # # # # # # # # # # # # # # #                   #", 0
+l2row15 db "#                       . . . . . . . . # # # . . . . . . . .                       #", 0
+l2row16 db "#               # # # #   . . . . . . . # # # . . . . . . .   # # # #               #", 0
+l2row17 db "#               . . . #     . . . . . . # # # . . . . . .     # . . .               #", 0
+l2row18 db "#                 . . #       . . . . . # # # . . . . .       # . .                 #", 0
+l2row19 db "#         # .       . #         . . . . . # . . . . .         # .      . #          #", 0
+l2row20 db "#         # . .                   . . . . # . . . .                  . . #          #", 0
+l2row21 db "#         # . . .                   . . . # . . .                  . . . #          #", 0
+l2row22 db "#         # # # #                     . . # . .                    # # # #          #", 0
+l2row23 db "#                                                                                   #", 0
+l2row24 db "#                                                                                   #", 0
+l2row25 db "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #", 0
 
 StringLvl db "Level 01 : In the beninging                                                          ", 0
 xUI db "|                      |", 0
@@ -417,19 +460,23 @@ titleScreen PROC
 
 
 call makeSquare
-
-mov dh, 10
-mov dl, 80
+mov bh, 10
+mov dh, bh
+mov dl, 1
 call gotoxy
 mov eax, green+ (black* 16)
 call SetTextColor
-call crlf
-mov edx, Offset strtitle0 - 81
-mov ecx, 7
+mov edx, Offset strtitle0 - 77
+mov ecx, 9
 TitleLoop:
-add edx, 81
+add edx, 77
 CALL writestring
-call crlf
+push edx
+inc bh
+mov dh, bh
+mov dl, 1
+call gotoxy
+pop edx
 loop TitleLoop
 
 ret
@@ -439,6 +486,22 @@ titleScreen endp
 
 wiki proc
 call makeSquare
+mov bh, 4
+mov dh, bh
+mov dl, 15
+call gotoxy
+mov ecx, 11
+mov edx, Offset wikir1 - 85
+WikiLoop:
+add edx, 85
+CALL writestring
+push edx
+inc bh
+mov dh, bh
+mov dl, 15
+call gotoxy
+pop edx
+loop WikiLoop
 ret
 wiki endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -700,11 +763,35 @@ mov dl, xPos
 		jmp continueElseDelta
 		
 PacMove endp
+;;;;;;;;;;;;;;;;
 main PROC
-
-;call titleScreen
-;call wiki
-;call readchar
+titleContinue:
+call Clrscr
+call titleScreen
+call readchar
+cmp al, 'e'
+je wikiHome
+cmp al, 'E'
+je wikiHome
+cmp al, 'P'
+je play
+cmp al, 'p'
+je play
+jmp titleContinue
+wikiHome:
+call Clrscr
+call wiki
+call readchar
+cmp al, 'e'
+je titleContinue
+cmp al, 'E'
+je titleContinue
+cmp al, 'P'
+je play
+cmp al, 'p'
+je play
+jmp wikiHome
+play:
 call Clrscr
 	call PrintBoard
 	call PrintDots
@@ -761,7 +848,7 @@ SpawnGhost PROC
 	call Gotoxy
 	 mov eax, White + (Black* 16)
     call SetTextColor
-	mov al, "G"
+	mov al, 232
 	call WriteChar
 	ret
 SpawnGhost ENDP
