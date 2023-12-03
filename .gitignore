@@ -27,3 +27,6 @@ PakMan/desktop.ini
 PakMan/PakMan.sln
 PakMan/Debug/PakMan.vcxproj.FileListAbsolute.txt
 .vs/slnx.sqlite
+Pak_Man/.vs/Pak_Man/v17/.suo
+Pak_Man/Debug/Pak_Man.vcxproj.FileListAbsolute.txt
+*.sln

@@ -1,4 +1,4 @@
-﻿INCLUDE Irvine32.inc
+INCLUDE Irvine32.inc
 
 .data
 
@@ -17,17 +17,7 @@ strtitle4 db "                                      |  __/|  _  ||    \ | |\/| |
 strtitle5 db "                                      | |   | | | || |\  \| |  | || | | || |\  |",0
 strtitle6 db "                                      \_|   \_| |_/\_| \_/\_|  |_/\_| |_/\_| \_/",0
           
-;strt0 db "                      the west has robinhood; we have                           ",0
-;strt1	  db "                      ██▓███   ▄▄▄       ██ ▄█▀ ███▄ ▄███▓ ▄▄▄       ███▄    █  ", 0 
-;strt2	  db "                     ▓██░  ██▒▒████▄     ██▄█▒ ▓██▒▀█▀ ██▒▒████▄     ██ ▀█   █  ", 0
-;strt3	  db "                     ▓██░ ██▓▒▒██  ▀█▄  ▓███▄░ ▓██    ▓██░▒██  ▀█▄  ▓██  ▀█ ██▒ ", 0
-;strt4	  db "                     ▒██▄█▓▒ ▒░██▄▄▄▄██ ▓██ █▄ ▒██    ▒██ ░██▄▄▄▄██ ▓██▒  ▐▌██▒ ", 0
-;strt5	  db "                     ▒██▒ ░  ░ ▓█   ▓██▒▒██▒ █▄▒██▒   ░██▒ ▓█   ▓██▒▒██░   ▓██░ ", 0
-;strt6	  db "                     ▒▓▒░ ░  ░ ▒▒   ▓▒█░▒ ▒▒ ▓▒░ ▒░   ░  ░ ▒▒   ▓▒█░░ ▒░   ▒ ▒  ", 0
-;strt7	  db "                     ░▒ ░       ▒   ▒▒ ░░ ░▒ ▒░░  ░      ░  ▒   ▒▒ ░░ ░░   ░ ▒░ ", 0
-;strt8	  db "                     ░░         ░   ▒   ░ ░░ ░ ░      ░     ░   ▒      ░   ░ ░  ", 0
-;strt9	  db "                                    ░  ░░  ░          ░         ░  ░         ░  ", 0
-                                                          
+                                   
 
 
 ;		  1	2 3 4 5 6 7 8 9 101112131415161718
@@ -63,7 +53,9 @@ yUI db " ----------------------", 0
 xyUI db "|----------------------|", 0
 
 dot db ".", 0
-Spaces db "                                                                                                                         ",0
+Spaces db "                                                                                                              ",0
+xtitleUI db "|                                                                                                              |",0
+
 foodx1 db 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5
 foodx2 db 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7 
 foodx3 db 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10
@@ -379,16 +371,55 @@ endFood:
 isFood endp
 
 titleScreen PROC
-mov ecx, 10
-mov edx, Offset spaces
 
-TitletempLoop:
-call writestring
-loop TitletempLoop
+
+mov al, 218
+call writechar
+
 mov eax, green+ (black* 16)
-    call SetTextColor
+call SetTextColor
+mov ecx, 110
+mov al, 196
+titleRoof:
+call writechar
+loop titleRoof
+
+mov al, 191
+call writechar
+
 call crlf
-mov edx, Offset strt0 - 81
+mov ecx, 27
+
+titleRight:
+mov al, 179
+call writechar
+mov edx, Offset spaces
+call writestring
+
+mov al, 179
+call writechar
+call crlf
+loop titleRight
+
+mov al, 195
+call writechar
+
+mov ecx, 110
+mov al, 196
+titleBase:
+call writechar
+loop titleBase
+
+mov al, 217
+call writechar
+
+mov dh, 10
+mov dl, 20
+call gotoxy
+mov eax, green+ (black* 16)
+call SetTextColor
+call crlf
+mov edx, Offset strtitle0 - 81
 mov ecx, 7
 TitleLoop:
 add edx, 81
@@ -441,6 +472,7 @@ isWall endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 main PROC
+
 call titleScreen
 call readchar
 	call PrintBoard
