@@ -16,9 +16,12 @@ strtitle3 db "                                      | |_/ / /_\ \| |/ / | .  . |
 strtitle4 db "                                      |  __/|  _  ||    \ | |\/| ||  _  || . ` |",0
 strtitle5 db "                                      | |   | | | || |\  \| |  | || | | || |\  |",0
 strtitle6 db "                                      \_|   \_| |_/\_| \_/\_|  |_/\_| |_/\_| \_/",0
-          
-                                   
 
+strxyUI   db "										[E] Wiki/How to Play           [P] Play   ",0
+
+
+strwiki1 db "Press Arrow Keys To Move",0
+strwiki2 db "Press Arrow Keys To Move",0
 
 ;		  1	2 3 4 5 6 7 8 9 101112131415161718
 row1  db "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #", 0
@@ -120,13 +123,8 @@ score BYTE 0
 xPos BYTE 10
 yPos BYTE 4
 
-   MIN_X equ 1
-    MIN_Y equ 1
-    MAX_X equ 80 ; Assuming a console width of 80 characters
-    MAX_Y equ 25
-
-xCoinPos BYTE ?
-yCoinPos BYTE ?
+xG1 db 10
+yG1 db 10
 
 inputChar BYTE ?
 
@@ -369,15 +367,13 @@ elseifFood:
 endFood:
     ret
 isFood endp
-
-titleScreen PROC
-
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+makeSquare proc
+mov eax, green+ (black* 16)
+call SetTextColor
 mov al, 218
 call writechar
 
-mov eax, green+ (black* 16)
-call SetTextColor
 mov ecx, 110
 mov al, 196
 titleRoof:
@@ -412,9 +408,18 @@ loop titleBase
 
 mov al, 217
 call writechar
+ret
+makeSquare endp
+;;;;;;;;;;;;;;;;;;;;;;
+titleScreen PROC
+
+
+
+
+call makeSquare
 
 mov dh, 10
-mov dl, 20
+mov dl, 80
 call gotoxy
 mov eax, green+ (black* 16)
 call SetTextColor
@@ -425,9 +430,17 @@ TitleLoop:
 add edx, 81
 CALL writestring
 call crlf
-
 loop TitleLoop
+
+ret
 titleScreen endp
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+wiki proc
+call makeSquare
+ret
+wiki endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 isWall PROC
 	xor ecx, ecx
@@ -470,30 +483,12 @@ isWall endp
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+GhostMove Proc
 
-main PROC
+GhostMove Endp
 
-call titleScreen
-call readchar
-	call PrintBoard
-	call PrintDots
-
-	call PrintxUI
-	
-    
-	call DrawPlayer
-
-
-	gameLoop:
-	mov eax, 100
-	call delay
-	mov dl, 0
-	mov dh, 25
-	call gotoxy
-	mov al, scorecounter
-	call WriteDec
-	
-	mov dl, xPos
+PacMove Proc
+mov dl, xPos
 	mov dh, yPos
 	CALL GoToXY
 	mov eax, 0
@@ -537,7 +532,7 @@ call readchar
 		
 
 		call DrawPlayer
-		call gameloop
+		ret
 	DeltaUpBack:
 		inc dh
 		inc yPos
@@ -568,7 +563,7 @@ call readchar
 		mov lastposy, 1
 		mov lastposx, 0
 		call DrawPlayer
-		call gameloop
+		ret
 				
 		DeltaDownBack:
 		dec dh
@@ -601,7 +596,7 @@ call readchar
 		mov lastposy, 0
 		mov lastposx, -1
 		call DrawPlayer
-		call gameloop
+		ret
 	
 	DeltaLeftBack:
 		inc xPos
@@ -634,7 +629,7 @@ call readchar
 		mov lastposy, 0
 		mov lastposx, 1
 		call DrawPlayer
-		call gameloop
+		ret
 	DeltaRightBack:
 		dec xPos
 		dec dl
@@ -693,7 +688,7 @@ call readchar
 		mov dh, yPos
 		CALL GoToXY
 		call DrawPlayer		
-		call gameloop
+		ret
 
 
 	DeltaElseBack:
@@ -703,7 +698,35 @@ call readchar
 		sub xPos, dh
 		sub yPos, dl
 		jmp continueElseDelta
+		
+PacMove endp
+main PROC
 
+;call titleScreen
+;call wiki
+;call readchar
+call Clrscr
+	call PrintBoard
+	call PrintDots
+
+	call PrintxUI
+	
+    
+	call DrawPlayer
+
+	call SpawnGhost
+	gameLoop:
+	
+	mov eax, 100
+	call delay
+	mov dl, 0
+	mov dh, 25
+	call gotoxy
+	mov al, scorecounter
+	call WriteDec
+
+	call PacMove
+	loop gameloop
 	
 
 main ENDP
@@ -731,6 +754,17 @@ UpdatePlayer PROC
 	call WriteChar
 	ret
 UpdatePlayer ENDP
+
+SpawnGhost PROC
+	mov dl,xG1
+	mov dh,yG1
+	call Gotoxy
+	 mov eax, White + (Black* 16)
+    call SetTextColor
+	mov al, "G"
+	call WriteChar
+	ret
+SpawnGhost ENDP
 
 
 	
