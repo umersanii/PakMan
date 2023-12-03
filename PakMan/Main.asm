@@ -36,24 +36,68 @@ row22 db "#                            # .   . #  . .  # .   . #                
 row23 db "#                            # # # # # # # # # # # # #                              #", 0
 row24 db "#                                                                                   #", 0
 row25 db "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #", 0
+
+
+r1  db "#", " ", "#", 0 ; r1
+r2  db '#                                                                                   #', 0 ; r2
+r3  db '#       # # # # # # # # # # # # #                 # # # # # # # # # # # # #         #', 0 ; r3
+r4  db '#       # . . . . . # . . . . . #                 # . . . . . . . . . . . #         #', 0 ; r4
+r5  db '#       # . . . . . # . . . . . #                 # . . . . . . . . . . . #         #', 0 ; r5
+r6  db '#       # . . . . . # . . . . . #                 # . . # # # # # # # . . #         #', 0 ; r6
+r7  db '#       # . . . . . # . . . . . #                 # . . #    . .    # . . #         #', 0 ; r7
+r8  db '#       # . . . . . # . . . . . #                 # . . #    . .    # . . #         #', 0 ; r8
+r9  db '#       # . . . . . # . . . . . #                 # . . #    . .    # . . #         #', 0 ; r9
+r10 db '#       # . . . . . # . . . . . #                 # . . #    . .    # . . #         #', 0 ; r10
+r11 db '#       # . . . . . # . . . . . #                 # . . #    . .    # . . #         #', 0 ; r11
+r12 db '#                                                                                   #', 0 ; r12
+r13 db '#                                                                                   #', 0 ; r13
+r14 db '#                            # .   . #  . .  # .   . #                              #', 0 ; r14
+r15 db '#                            # .   . #  . .  # .   . #                              #', 0 ; r15
+r16 db '#                            # .   . #  . .  # .   . #                              #', 0 ; r16
+r17 db '#                            # .   . #  . .  # .   . #                              #', 0 ; r17
+r18 db '#                            # .   . #  . .  # .   . #                              #', 0 ; r18
+r19 db '#                            # .   . #  . .  # .   . #                              #', 0 ; r19
+r20 db '#                            # .   . #  . .  # .   . #                              #', 0 ; r20
+r21 db '#                            # .   . #  . .  # .   . #                              #', 0 ; r21
+r22 db '#                            # .   . #  . .  # .   . #                              #', 0 ; r22
+r23 db '#                            # # # # # # # # # # # # #                              #', 0 ; r23
+r24 db '#                                                                                   #', 0 ; r24
+r25 db '# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #', 0 ; r25
+
+
 dot db ".", 0
 
-foodx1 db 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
-foodx2 db 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6
-foodx3 db 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9
-foodx4 db 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 13, 13, 13, 13
-foodx5 db 13, 13, 14, 14, 14, 14, 14, 14, 15, 15, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16, 17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 19, 19, 19 
-foodx6 db 19, 19, 19, 20, 20, 20, 20, 20, 20, 21, 21, 21, 21, 21, 21
+foodx1 db 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5
+foodx2 db 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7 
+foodx3 db 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10
+foodx4 db 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 14, 14, 14, 14
+foodx5 db 14, 14, 15, 15, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16, 17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 19, 19, 19, 19, 19, 19, 20, 20, 20
+foodx6 db 20, 20, 20, 21, 21, 21, 21, 21, 21, 22, 22, 22, 22, 22, 22
 
-foody1 db 10, 12, 14, 16, 18, 22, 24, 26, 28, 30, 52, 54, 56, 58, 60, 62, 64, 66, 68, 70
-foody2 db 72, 10, 12, 14, 16, 18, 22, 24, 26, 28, 30, 52, 54, 56, 58, 60, 62, 64, 66, 68, 70, 72, 10, 12, 14, 16, 18, 22, 24, 26, 28, 30, 52, 54, 70
-foody3 db 72, 10, 12, 14, 16, 18, 22, 24, 26, 28, 30, 52, 54, 61, 63, 70, 72, 10, 12, 14, 16, 18, 22, 24, 26, 28, 30, 52, 54, 61, 63, 70, 72, 10, 12
-foody4 db 14, 16, 18, 22, 24, 26, 28, 30, 52, 54, 61, 63, 70, 72, 10, 12, 14, 16, 18, 22, 24, 26, 28, 30, 52, 54, 61, 63, 70, 72, 10, 12, 14, 16, 18 
-foody5 db 22, 24, 26, 28, 30, 52, 54, 61, 63, 70, 72, 31, 35, 40, 42, 47, 51, 31, 35, 40, 42, 47, 51, 31, 35, 40, 42, 47, 51, 31, 35, 40, 42, 47, 51
-foody6 db 31, 35, 40, 42, 47, 51, 31, 35, 40, 42, 47, 51, 31, 35, 40, 42, 47, 51, 31, 35, 40, 42, 47, 51, 31, 35, 40, 42, 47, 51
+foody1 db 11, 13, 15, 17, 19, 23, 25, 27, 29, 31, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71
+foody2 db 73, 11, 13, 15, 17, 19, 23, 25, 27, 29, 31, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 11, 13, 15, 17, 19, 23, 25, 27, 29, 31, 53, 55, 71
+foody3 db 73, 11, 13, 15, 17, 19, 23, 25, 27, 29, 31, 53, 55, 62, 64, 71, 73, 11, 13, 15, 17, 19, 23, 25, 27, 29, 31, 53, 55, 62, 64, 71, 73, 11, 13
+foody4 db 15, 17, 19, 23, 25, 27, 29, 31, 53, 55, 62, 64, 71, 73, 11, 13, 15, 17, 19, 23, 25, 27, 29, 31, 53, 55, 62, 64, 71, 73, 11, 13, 15, 17, 19
+foody5 db 23, 25, 27, 29, 31, 53, 55, 62, 64, 71, 73, 32, 36, 41, 43, 48, 52, 32, 36, 41, 43, 48, 52, 32, 36, 41, 43, 48, 52, 32, 36, 41, 43, 48, 52
+foody6 db 32, 36, 41, 43, 48, 52, 32, 36, 41, 43, 48, 52, 32, 36, 41, 43, 48, 52, 32, 36, 41, 43, 48, 52, 32, 36, 41, 43, 48, 52
+
+
+wallx1 db 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4
+wallx2 db 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 9
+wallx3 db 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 13, 13, 13, 13, 14, 14, 14, 14, 15, 15, 15, 15, 16, 16, 16, 16, 17, 17, 17, 17, 18, 18
+wallx4 db 18, 18, 19, 19, 19, 19, 20, 20, 20, 20, 21, 21, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22
+
+wally1 db 8, 32, 50, 74, 8, 20, 32, 50, 74, 8, 20, 32, 50, 74, 8, 20, 32, 50, 56, 58, 60 
+wally2 db 62, 64, 66, 68, 74, 8, 20, 32, 50, 56, 68, 74, 8, 20, 32, 50, 56, 68, 74, 8, 20, 32, 50, 56, 68, 74, 8, 20, 32, 50, 56, 68, 74, 8, 20
+wally3 db 32, 50, 56, 68, 74, 29, 37, 45, 53, 29, 37, 45, 53, 29, 37, 45, 53, 29, 37, 45, 53, 29, 37, 45, 53, 29, 37, 45, 53, 29, 37, 45, 53, 29, 37
+wally4 db 45, 53, 29, 37, 45, 53, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53
 
 foodcountlv1 db 190
-wall BYTE "|",0
+brickcountlv1 db 132
+boolAteFood db 0
+boolisWall db 0
+
+scorecounter db 0
 lastposx db 1
 lastposy db 0
 boolLastMove db 4
@@ -66,8 +110,8 @@ outofboundsx db 5 dup(?)
 strScore BYTE "Your score is: ",0
 score BYTE 0
 
-xPos BYTE 20
-yPos BYTE 20
+xPos BYTE 3
+yPos BYTE 10
 
    MIN_X equ 1
     MIN_Y equ 1
@@ -137,6 +181,7 @@ PrintBoard PROC
 	RET 
 
 PrintBoard ENDP
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 PrintDots PROC
 xor esi, esi
 mov cl,foodcountlv1
@@ -148,26 +193,121 @@ DotsLoop:
 pop eax
 add eax, 1
 mov dl, [eax]
+dec dl
 mov ebx, eax
 pop eax
 add eax, 1
 mov dh, [eax]
+dec dh
 call gotoxy
 mov edx, Offset dot
 CALL writestring
 push eax
 push ebx
 cmp ecx, 0
-je yes
+je ifDots
 Loop DotsLoop
 
-yes:
+ifDots:
 pop eax
 pop eax
 ret 
 Loop DotsLoop
-ret - 8
+pop eax
+pop eax
+ret 
 PrintDots endp
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+isFood Proc
+    xor ecx, ecx
+    mov ecx, 0
+    mov esi, 0  
+	mov eax, Offset foodx1 - 1
+	mov edx, Offset foody1 - 1 ; esi for loop counter
+	; esi for loop counter
+
+FoodLoop:
+    cmp cl, foodcountlv1
+    je  endFood      ; Exit loop if all food items checked
+	add eax, 1
+	add edx, 1
+    mov bh, xpos
+	mov bl, [eax]
+	dec bl
+    cmp bh, bl
+    je  ifFood
+continueFood:
+
+    inc ecx
+    jmp FoodLoop
+
+ifFood:
+    mov bh, ypos
+    mov bl, [edx]
+	dec bl
+
+    cmp bl, bh
+
+    je  elseifFood
+    jmp continueFood
+
+elseifFood:
+    inc scorecounter
+    jmp endFood
+
+endFood:
+    ret
+isFood endp
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+isWall PROC
+	xor ecx, ecx
+    mov cl, brickcountlv1
+    mov esi, 0  
+	mov eax, Offset r1
+	mov edx, eax
+	;call writestring
+	;cmp [eax], '#'
+	je yes2
+	add eax,  8
+	add eax , 2
+	mov ebx, [eax]
+	yes2:
+	mov edx, Offset wally1 - 1 ; esi for loop counter
+	; esi for loop counter
+
+WallLoop:
+    cmp esi, DWORD PTR brickcountlv1
+    je  endWall; Exit loop if all food items checked
+	add eax, 1
+	add edx, 1
+
+    mov bh, xpos
+    cmp bh, [eax]
+    je  ifWall
+
+    inc esi
+    jmp WallLoop
+
+ifWall:
+    mov bl, ypos
+    cmp bl, [edx]
+    je  elseifWall
+    jmp continueWall
+
+elseifWall:
+    mov boolisWall, 1
+
+continueWall:
+    jmp endWall
+
+endWall:
+    ret
+isWall endp
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 main PROC
 	call PrintBoard
@@ -202,23 +342,33 @@ main PROC
 	jmp DeltaLast
 
 	DeltaUp:
+		;call isFood
 		mov boolLastMove, 1
 		mov dh, yPos
 		mov dl, xPos
 		CALL GoToXY
 		CALL UpdatePlayer
 		dec yPos
+		mov boolisWall, 0
+		call isWall
+		cmp boolisWall, 1
+		je DeltaUpBack
+		DeltaUpContinue:
 		mov dh, yPos
 		CALL GoToXY
 		mov lastposy, -1
 		mov lastposx, 0
-
+		
 
 		call DrawPlayer
 	call gameloop
-
+	DeltaUpBack:
+		inc yPos
+		jmp DeltaUpContinue
 	
 	DeltaDown:
+		;call isFood
+
 		mov boolLastMove, 3
 		
 		mov dh, yPos
@@ -242,6 +392,8 @@ main PROC
 	
 
 	DeltaLeft:
+		call isFood
+
 		mov boolLastMove, 2
 		mov dh, yPos
 		mov dl, xPos
@@ -259,6 +411,7 @@ main PROC
 	
 	
 	DeltaRight:
+		;call isFood
 		mov boolLastMove, 4
 		cmp boolWallCollison, 1
 		mov dh, yPos
@@ -275,6 +428,8 @@ main PROC
 		
 	
 	DeltaLast:
+		call isFood
+		call isWall
 
 		mov dl, xPos
 		mov dh, yPos
@@ -317,17 +472,15 @@ main PROC
 		mov dl, xPos
 		mov dh, yPos
 		CALL GoToXY
-		call DrawPlayer
-				
+		call DrawPlayer		
+		call gameloop
 
 
 	
 
-	call gameloop
 
 	
-	exitGame:
-	exit
+
 main ENDP
 
 DrawPlayer PROC
@@ -354,25 +507,7 @@ UpdatePlayer PROC
 	ret
 UpdatePlayer ENDP
 
-DrawCoin PROC
-	mov eax,yellow+(red * 16)
-	call SetTextColor
-	mov dl,xCoinPos
-	mov dh,yCoinPos
-	call Gotoxy
-	mov al,"X"
-	call WriteChar
-	ret
-DrawCoin ENDP
 
-CreateRandomCoin PROC
-	mov eax,55
-	inc eax
-	call RandomRange
-	mov xCoinPos,al
-	mov yCoinPos,27
-	ret
-CreateRandomCoin ENDP
 	
 END main
 
