@@ -1,6 +1,11 @@
 INCLUDE Irvine32.inc
+includelib Winmm.lib
 
 .data
+PlaySound PROTO,
+pszSound:PTR BYTE, 
+hmod:DWORD, 
+fdwSound:DWORD
 
 DOWNARROW BYTE 50h
 LEFTARROW BYTE 4Bh
@@ -9,18 +14,19 @@ UPARROW BYTE 48h
 
 boolWallCollison db 0
 
+aye         db 'aye.wav',0  
 
 
 
-strtitle0 db "                                  who needs a pacman, when you have         ",0
-strtitle1 db "                                  ______  ___   _   _____  ___  ___   _   _ ",0
-strtitle2 db "                                  | ___ \/ _ \ | | / /|  \/  | / _ \ | \ | |",0
-strtitle3 db "                                  | |_/ / /_\ \| |/ / | .  . |/ /_\ \|  \| |",0
-strtitle4 db "                                  |  __/|  _  ||    \ | |\/| ||  _  || . ` |",0
-strtitle5 db "                                  | |   | | | || |\  \| |  | || | | || |\  |",0
-strtitle6 db "                                  \_|   \_| |_/\_| \_/\_|  |_/\_| |_/\_| \_/",0
-strtitle7 db "                                                                            ",0
-strtitle8 db "                                  [E] Wiki/How to Play              [P] Play",0
+strtitle0 db "                                who needs a pacman, when you have         ",0
+strtitle1 db "                                ______  ___   _   _____  ___  ___   _   _ ",0
+strtitle2 db "                                | ___ \/ _ \ | | / /|  \/  | / _ \ | \ | |",0
+strtitle3 db "                                | |_/ / /_\ \| |/ / | .  . |/ /_\ \|  \| |",0
+strtitle4 db "                                |  __/|  _  ||    \ | |\/| ||  _  || . ` |",0
+strtitle5 db "                                | |   | | | || |\  \| |  | || | | || |\  |",0
+strtitle6 db "                                \_|   \_| |_/\_| \_/\_|  |_/\_| |_/\_| \_/",0
+strtitle7 db "                                                                          ",0
+strtitle8 db "                                [E] Wiki/How to Play              [P] Play",0
 
 
 strwiki1 db "Press Arrow Keys To Move",0
@@ -93,12 +99,39 @@ l2row23 db "#                                                                   
 l2row24 db "#                                                                                   #", 0
 l2row25 db "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #", 0
 
+l3row1  db "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #", 0
+l3row2  db "#                                                                                   #", 0
+l3row3  db "#                                                                                   #", 0
+l3row4  db "#                              .. . .                                #", 0
+l3row5  db "#                       # # # # # # # #       # # # # # # # #          #", 0
+l3row6  db "#                                                                            ", 0
+l3row7  db "#                             #  . . . . .# . . . . . #               #         #", 0
+l3row8  db "#                             . #. . . .  #   . . . #. .                          ", 0
+l3row9  db "#                           . . . #. . .  #   . . #. . . .                         ", 0
+l3row10 db "#                         . . . . . #.    #   . #. . . . . .                 #", 0
+l3row11 db "#                       . . . . . . . #.  #   #. . . . . . . .                       #", 0
+l3row12 db "#                                       # # #                                                     #", 0
+l3row13 db "#                           # # # # # # # # # # # # # # #                  ", 0
+l3row14 db "#                                       # # #                                                     #", 0
+l3row15 db "#                       . . . . . . . #   #   #. . . . . . . .                       #", 0
+l3row16 db "#                         . . . . . #     #   . #. . . . . .                #", 0
+l3row17 db "#                           . . . # .     #   . . #. . . .                    #", 0
+l3row18 db "#                             ..#. .      #   . . . #. .                       #", 0
+l3row19 db "#                          . .# . . .     # . . . . . #           . #          #", 0
+l3row20 db "#                           #. . . .      # . . . .     #               . . #          #", 0
+l3row21 db "#                                                             . . . #          #", 0
+l3row22 db "#                                                                #", 0
+l3row23 db "#                                                                                   #", 0
+l3row24 db "#                                                                                   #", 0
+l3row25 db "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #", 0
+
 StringLvl db "Level 01 : In the beninging                                                          ", 0
 xUI db "|                      |", 0
 yUI db " ----------------------", 0
 xyUI db "|----------------------|", 0
 
 dot db ".", 0
+spaces2 db "                                                                                                          ",0
 Spaces db "                                                                                                              ",0
 xtitleUI db "|                                                                                                              |",0
 
@@ -173,41 +206,7 @@ inputChar BYTE ?
 
 .code
 
-;DrawBoundry PROC
-;mov dl, al
-;mov dh, ah
-;call Gotoxy
-;mov edx, OFFSET vertical
-;call WriteString
-;ret
-;DrawBoundry ENDP
 
-
-OutOfBound PROC
-xor esi, esi
-mov ecx, Lengthof outofboundsy
-mov bh, ypos
-dec bh
-OutLoop1:
-mov dl, outofboundsy[esi]
-mov ah, outofboundsx[esi]
-cmp bh, ah
-je BoundryHitYInitial
-inc esi
-Loop OutLoop1
-jmp ReturnFromOutOfBound
-BoundryHitYInitial:
-mov ah, outofboundsy[esi]
-mov dl, xpos
-cmp xpos, ah
-je BoundryHitYFinal
-jmp ReturnFromOutOfBound
-BoundryHitYFinal:
-inc bl
-jmp ReturnFromOutOfBound
-ReturnFromOutOfBound:
-ret
-OutOfBound endp
 
 PrintBoard PROC
 	mov eax, blue+ (black* 16)
@@ -221,10 +220,6 @@ PrintBoard PROC
 		CALL CRLF
 
 		Loop BoardLoop
-
-		
-	
-		
 
 	RET 
 
@@ -411,6 +406,65 @@ endFood:
     ret
 isFood endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+makeSquare1 proc
+mov bh, 1
+mov dh, bh
+mov dl, 2
+call gotoxy
+
+mov eax, green+ (black* 16)
+call SetTextColor
+mov al, 218
+call writechar
+
+mov ecx, 106
+mov al, 196
+titleRoof:
+call writechar
+loop titleRoof
+
+mov al, 191
+call writechar
+
+mov bh, 2
+mov dh, bh
+mov dl, 2
+call gotoxy
+mov ecx, 24
+
+titleRight1:
+mov al, 179
+call writechar
+mov edx, Offset spaces2
+call writestring
+
+mov al, 179
+call writechar
+inc bh
+mov dh, bh
+mov dl, 2
+call gotoxy
+loop titleRight1
+
+mov bh, 25
+mov dh, bh
+mov dl, 2
+call gotoxy
+
+mov al, 195
+call writechar
+
+mov ecx, 106
+mov al, 196
+titleBase1:
+call writechar
+loop titleBase1
+
+mov al, 217
+call writechar
+ret
+makeSquare1 endp
+
 makeSquare proc
 mov eax, green+ (black* 16)
 call SetTextColor
@@ -427,7 +481,7 @@ mov al, 191
 call writechar
 
 call crlf
-mov ecx, 27
+mov ecx, 25
 
 titleRight:
 mov al, 179
@@ -460,24 +514,26 @@ titleScreen PROC
 
 
 call makeSquare
+call makeSquare1
 mov bh, 10
 mov dh, bh
-mov dl, 1
+mov dl, 3
 call gotoxy
 mov eax, green+ (black* 16)
 call SetTextColor
-mov edx, Offset strtitle0 - 77
+mov edx, Offset strtitle0 - 75
 mov ecx, 9
 TitleLoop:
-add edx, 77
+add edx, 75
 CALL writestring
 push edx
 inc bh
 mov dh, bh
-mov dl, 1
+mov dl, 3
 call gotoxy
 pop edx
 loop TitleLoop
+INVOKE PlaySound, OFFSET aye, NULL, 0
 
 ret
 titleScreen endp
@@ -855,5 +911,5 @@ SpawnGhost ENDP
 
 
 	
-END main
+END main	
 
