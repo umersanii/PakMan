@@ -27,6 +27,16 @@ strtitle5 db "                                | |   | | | || |\  \| |  | || | | 
 strtitle6 db "                                \_|   \_| |_/\_| \_/\_|  |_/\_| |_/\_| \_/",0
 strtitle7 db "                                                                          ",0
 strtitle8 db "                                [E] Wiki/How to Play              [P] Play",0
+ 
+sgameover1 db "  ____                         ___                 _ ",0
+sgameover2 db " / ___| __ _ _ __ ___   ___   / _ \__   _____ _ __| |",0
+sgameover3 db "| |  _ / _` | '_ ` _ \ / _ \ | | | \ \ / / _ | '__| |",0
+sgameover4 db "| |_| | (_| | | | | | |  __/ | |_| |\ V |  __| |  |_|",0
+sgameover5 db " \____|\__,_|_| |_| |_|\___|  \___/  \_/ \___|_|  (_)",0
+sgameover6 db "                                                     ",0
+sgameover7 db "             You Managed to Score = ",0
+
+sgameover8 db " [E] Title                       [E] Wiki/How To Play",0
 
 
 strwiki1 db "Press Arrow Keys To Move",0
@@ -39,7 +49,7 @@ wikir5 db "                                                                     
 wikir6 db "                                                                                    ",0
 wikir7 db "                                    How to Play                                     ",0
 wikir8 db "                                                                                    ",0
-wikir9 db "                          Good Luck, Have Fun, Don't Die                            ",0
+wikir9 db "                          [G]ood Luck, Have Fun, Don't Die                          ",0
 wikir10 db "                                                                                   ",0
 wikir11 db "                      [E] TitleScreen              [P] Play                        ",0
 
@@ -101,28 +111,29 @@ l2row25 db "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 l3row1  db "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #", 0
 l3row2  db "#                                                                                   #", 0
-l3row3  db "#                                                                                   #", 0
-l3row4  db "#                              .. . .                                #", 0
-l3row5  db "#                       # # # # # # # #       # # # # # # # #          #", 0
-l3row6  db "#                                                                            ", 0
-l3row7  db "#                             #  . . . . .# . . . . . #               #         #", 0
-l3row8  db "#                             . #. . . .  #   . . . #. .                          ", 0
-l3row9  db "#                           . . . #. . .  #   . . #. . . .                         ", 0
-l3row10 db "#                         . . . . . #.    #   . #. . . . . .                 #", 0
-l3row11 db "#                       . . . . . . . #.  #   #. . . . . . . .                       #", 0
+l3row3  db "#                   # # # # # # # # # # # # # # # # # # # # # # #                                                                #", 0
+l3row4  db "#                                                                    #", 0
+l3row5  db "#                   # # # # # # # # # #       # # # # # # # # # #           #", 0
+l3row6  db "#                   #                                           #              ", 0
+l3row7  db "#                   #         #  . . . . .# . . . . . #         #       #         #", 0
+l3row8  db "#                   #         . #. . . .  #   . . . #. .        #                   ", 0
+l3row9  db "#                   #       . . . #. . .  #   . . #. . . .      #                    ", 0
+l3row10 db "#                   #     . . . . . #.    #   . #. . . . . .    #              #", 0
+l3row11 db "#                   #   . . . . . . . #.  #   #. . . . . . . .  #                      #", 0
 l3row12 db "#                                       # # #                                                     #", 0
 l3row13 db "#                           # # # # # # # # # # # # # # #                  ", 0
+
 l3row14 db "#                                       # # #                                                     #", 0
-l3row15 db "#                       . . . . . . . #   #   #. . . . . . . .                       #", 0
-l3row16 db "#                         . . . . . #     #   . #. . . . . .                #", 0
-l3row17 db "#                           . . . # .     #   . . #. . . .                    #", 0
-l3row18 db "#                             ..#. .      #   . . . #. .                       #", 0
-l3row19 db "#                          . .# . . .     # . . . . . #           . #          #", 0
-l3row20 db "#                           #. . . .      # . . . .     #               . . #          #", 0
-l3row21 db "#                                                             . . . #          #", 0
-l3row22 db "#                                                                #", 0
+l3row15 db "#                   #     . . . . . . #   #   #. . . . . . . .   #                     #", 0
+l3row16 db "#                   #     . . . . . #     #   . #. . . . . .     #            #", 0
+l3row17 db "#                   #       . . . # .     #   . . #. . . .       #              #", 0
+l3row18 db "#                   #         ..#. .      #   . . . #. .         #               #", 0
+l3row19 db "#                   #      . .# . . .     # . . . . . #          #  . #          #", 0
+l3row20 db "#                   #       #. . . .      # . . . .     #        #        . . #          #", 0
+l3row21 db "#                   #                                          . # . #          #", 0
+l3row22 db "#                   # # # # # # # # # #       # # # # # # # # # ##                                         #", 0
 l3row23 db "#                                                                                   #", 0
-l3row24 db "#                                                                                   #", 0
+l3row24 db "#                   # # # # # # # # # # # # # # # # # # # # # # #                                                                #", 0
 l3row25 db "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #", 0
 
 StringLvl db "Level 01 : In the beninging                                                          ", 0
@@ -190,17 +201,20 @@ boolLastMove db 4
 outofboundsy db 5 dup(?) 
 outofboundsx db 5 dup(?) 
 
+lastxG1 db 1
+lastyG1 db 1
 
 
 strxUI BYTE "Previous Pak-Men",0
 stryUI db "& ",0
 score BYTE 0
 
+
 xPos BYTE 10
 yPos BYTE 4
 
-xG1 db 10
-yG1 db 10
+xG1 db 08
+yG1 db 12
 
 inputChar BYTE ?
 
@@ -310,20 +324,6 @@ PrintxUI PROC
 	mov edx, Offset Stringlvl
 	call writestring
 
-	mov eax, red+ (black* 16)
-    call SetTextColor
-	mov dl, 80
-	mov dh, 21
-	mov ecx, 3
-	HeartLoop:
-	
-	
-	
-	add dh, 4
-	call gotoxy
-	mov edx, Offset stryUI
-	call writestring
-	loop HeartLoop
 
 	RET 
 
@@ -562,32 +562,28 @@ ret
 wiki endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 isWall PROC
-	xor ecx, ecx
-    mov ecx, 0
+	
     mov esi, 0  
-	mov eax, Offset wallx1 - 1
-	mov edx, Offset wally1 - 1 
-
+	
 WallLoop:
     cmp cl, brickcountlv1
     je  endWall   
 	add eax, 1
 	add edx, 1
-    mov bh, ypos
 	mov bl, [eax]
     cmp bh, bl
+
     je  ifWall
 continueWall:
 
-    inc ecx
+    inc cl
     jmp WallLoop
 
 ifWall:
-    mov bh, xpos
     mov bl, [edx]
 	
 
-    cmp bl, bh
+    cmp ch, bl
 
     je  elseifWall
     jmp continueWall
@@ -599,12 +595,138 @@ elseifWall:
 endWall:
     ret
 isWall endp
+;;;;;;;;;;;;;;;;;;;;
+Gameover Proc
+call makeSquare
+call makeSquare1
+mov bh, 10
+mov dh, bh
+mov dl, 30
+call gotoxy
+mov eax, green+ (black* 16)
+call SetTextColor
+mov edx, Offset sgameover1 - 54
+mov ecx, 6
+TitleLoop:
+add edx, 54
+CALL writestring
+push edx
+inc bh
+mov dh, bh
+mov dl, 30
+call gotoxy
+pop edx
+loop TitleLoop
+mov edx, Offset sgameover7
+CALL writestring
+mov eax, 0
+mov al, scorecounter
+call WriteDec
+mov dh, 19
+mov dl, 30
+call gotoxy
+mov edx, Offset sgameover8
+CALL writestring
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-GhostMove Proc
 
-GhostMove Endp
+
+INVOKE PlaySound, OFFSET aye, NULL, 0
+Gameover Endp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+GhostCollide PROC
+mov bl, xpos
+cmp xG1, bl
+je ifGhostCollide
+ret
+ifGhostCollide:
+mov bh, ypos
+cmp yG1, bh
+dec lifecount
+ret
+GhostCollide ENDP
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ GhostMoveP1 Proc
+call UpdateGhost
+cmp xG1, 3
+jle ChangeDirection
+
+cmp yG1, 3
+jle ChangeDirection
+
+
+cmp xG1, 80
+jge ChangeDirection
+
+
+cmp yG1, 25
+jge ChangeDirection
+GhostWallCheck:
+    mov boolisWall, 0
+	mov eax, Offset wallx1 - 1
+	mov edx, Offset wally1 - 1 
+	mov bh, yG1
+	mov ch, xG1
+	call isWall
+	cmp boolisWall, 1
+	je ChangeDirection
+	jmp NormalMove
+
+	ChangeDirection:
+	call Randomize
+	 mov eax, 4
+    call RandomRange
+    cmp eax, 1
+	je Change2Up
+
+	cmp eax, 3
+	je Change2Left
+
+
+	cmp eax, 80
+	je Change2Down
+
+
+	cmp eax, 25
+	je Change2Right
+
+	Change2Up:
+	mov lastyG1, -1
+	mov lastxG1, 0
+	jmp NormalMove
+
+	Change2Down:
+	mov lastyG1, 1
+	mov lastxG1, 0
+	jmp NormalMove
+
+
+	Change2Left:
+	mov lastyG1, 0
+	mov lastxG1, -1
+	jmp NormalMove
+
+
+	Change2Right:
+	mov lastyG1, 1
+	mov lastxG1, 0
+	jmp NormalMove
+
+
+
+
+NormalMove:
+mov dl, lastyG1
+mov dh, lastxG1
+add xG1, dh
+add yG1, dl
+		
+		
+call SpawnGhost
+ret
+
+GhostMoveP1 Endp
+;;;;;;;;;;;;;;;;;;;
 
 PacMove Proc
 mov dl, xPos
@@ -612,7 +734,7 @@ mov dl, xPos
 	CALL GoToXY
 	mov eax, 0
 	push edx
-	CALL ReadKey	;This is what causes continuous movement
+	CALL ReadKey	
 
 	pop edx
 
@@ -639,6 +761,10 @@ mov dl, xPos
 		dec dh
 		dec yPos
 		mov boolisWall, 0
+		mov eax, Offset wallx1 - 1
+		mov edx, Offset wally1 - 1 
+		mov bh, ypos
+		mov ch, xpos
 		call isWall
 		cmp boolisWall, 1
 		je DeltaUpBack
@@ -672,7 +798,10 @@ mov dl, xPos
 		inc yPos
 		inc dh
 		mov boolisWall, 0
-		
+		mov eax, Offset wallx1 - 1
+		mov edx, Offset wally1 - 1 
+		mov bh, ypos
+		mov ch, xpos
 		call isWall
 		cmp boolisWall, 1
 		je DeltaDownBack
@@ -703,7 +832,10 @@ mov dl, xPos
 
 		dec dl
 		SUB xPos, 1
-
+		mov eax, Offset wallx1 - 1
+		mov edx, Offset wally1 - 1 
+		mov bh, ypos
+		mov ch, xpos
 		mov boolisWall, 0
 		call isWall
 		cmp boolisWall, 1
@@ -736,7 +868,10 @@ mov dl, xPos
 
 		inc dl
 		ADD xPos, 1
-
+		mov eax, Offset wallx1 - 1
+		mov edx, Offset wally1 - 1 
+		mov bh, ypos
+		mov ch, xpos
 		mov boolisWall, 0
 		call isWall
 		cmp boolisWall, 1
@@ -795,7 +930,10 @@ mov dl, xPos
 		add xPos, dh
 		add yPos, dl
 		
-		
+		mov eax, Offset wallx1 - 1
+		mov edx, Offset wally1 - 1 
+		mov bh, ypos
+		mov ch, xpos
 		mov boolisWall, 0
 		call isWall
 		cmp boolisWall, 1
@@ -821,6 +959,7 @@ mov dl, xPos
 PacMove endp
 ;;;;;;;;;;;;;;;;
 main PROC
+
 titleContinue:
 call Clrscr
 call titleScreen
@@ -867,11 +1006,49 @@ call Clrscr
 	call gotoxy
 	mov al, scorecounter
 	call WriteDec
+	mov dl, 80
+	mov dh, 25
+	call gotoxy
+	mov edx, Offset spaces2
+	call writestring
+	mov eax, red+ (black* 16)
+    call SetTextColor
+	mov dl, 80
+	mov dh, 21
+	xor ecx, ecx
 
+
+	cmp lifecount, 0
+	je GG
+	mov cl, lifecount
+	HeartLoop:
+	
+	
+	
+	add dh, 4
+	call gotoxy
+	mov edx, Offset stryUI
+	call writestring
+	loop HeartLoop
+	;call GhostMoveP1
 	call PacMove
+	call GhostCollide
 	loop gameloop
 	
-
+	GG:
+	call Clrscr
+	call gameover
+	GGread:
+    call readchar
+	cmp al, 'q'
+	je titleContinue
+	cmp al, 'Q'
+	je titleContinue
+	cmp al, 'E'
+	je wikihome
+	cmp al, 'e'
+	je wikihome
+	jmp GGread
 main ENDP
 
 DrawPlayer PROC
@@ -897,6 +1074,17 @@ UpdatePlayer PROC
 	call WriteChar
 	ret
 UpdatePlayer ENDP
+
+UpdateGhost PROC
+	mov dl,xG1
+	mov dh,yG1
+	call Gotoxy
+	 mov eax, White + (Black* 16)
+    call SetTextColor
+	mov al," "
+	call WriteChar
+	ret
+UpdateGhost ENDP
 
 SpawnGhost PROC
 	mov dl,xG1
