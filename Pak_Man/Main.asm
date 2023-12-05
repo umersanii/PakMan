@@ -36,7 +36,7 @@ sgameover5 db " \____|\__,_|_| |_| |_|\___|  \___/  \_/ \___|_|  (_)",0
 sgameover6 db "                                                     ",0
 sgameover7 db "             You Managed to Score = ",0
 
-sgameover8 db " [E] Title                       [E] Wiki/How To Play",0
+sgameover8 db " [Q] Title                       [E] Wiki/How To Play",0
 
 
 strwiki1 db "Press Arrow Keys To Move",0
@@ -111,29 +111,27 @@ l2row25 db "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 l3row1  db "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #", 0
 l3row2  db "#                                                                                   #", 0
-l3row3  db "#                   # # # # # # # # # # # # # # # # # # # # # # #                                                                #", 0
-l3row4  db "#                                                                    #", 0
-l3row5  db "#                   # # # # # # # # # #       # # # # # # # # # #           #", 0
-l3row6  db "#                   #                                           #              ", 0
-l3row7  db "#                   #         #  . . . . .# . . . . . #         #       #         #", 0
-l3row8  db "#                   #         . #. . . .  #   . . . #. .        #                   ", 0
-l3row9  db "#                   #       . . . #. . .  #   . . #. . . .      #                    ", 0
-l3row10 db "#                   #     . . . . . #.    #   . #. . . . . .    #              #", 0
-l3row11 db "#                   #   . . . . . . . #.  #   #. . . . . . . .  #                      #", 0
-l3row12 db "#                                       # # #                                                     #", 0
-l3row13 db "#                           # # # # # # # # # # # # # # #                  ", 0
-
-l3row14 db "#                                       # # #                                                     #", 0
-l3row15 db "#                   #     . . . . . . #   #   #. . . . . . . .   #                     #", 0
-l3row16 db "#                   #     . . . . . #     #   . #. . . . . .     #            #", 0
-l3row17 db "#                   #       . . . # .     #   . . #. . . .       #              #", 0
-l3row18 db "#                   #         ..#. .      #   . . . #. .         #               #", 0
-l3row19 db "#                   #      . .# . . .     # . . . . . #          #  . #          #", 0
-l3row20 db "#                   #       #. . . .      # . . . .     #        #        . . #          #", 0
-l3row21 db "#                   #                                          . # . #          #", 0
-l3row22 db "#                   # # # # # # # # # #       # # # # # # # # # ##                                         #", 0
-l3row23 db "#                                                                                   #", 0
-l3row24 db "#                   # # # # # # # # # # # # # # # # # # # # # # #                                                                #", 0
+l3row3  db "#                   # # # # # # # # # # # # # # # # # # # # # # #                                                                 #", 0
+l3row4  db "#                                                                   #", 0
+l3row5  db "#                 #  # # # # # # # # # #       # # # # # # # # # #                                                       #", 0
+l3row6  db "#                 #  #                                           #                                                           ", 0
+l3row7  db "#                 #  #         . #. . . .  #   . . . #. .        #       #         #", 0
+l3row8  db "#                 #  #       . . . #. . .  #   . . #. . . .      #                   ", 0
+l3row9  db "#                 #  #     . . . . . #.    #   . #. . . . . .    #                    ", 0
+l3row10 db "#                 #  #   . . . . . . . #.  #   #. . . . . . . .  #              #", 0
+l3row11 db "#                 #                      # # #", 0
+l3row12 db "#                 #          # # # # # # # # # # # # # # #                                                                #", 0
+l3row13 db "#                 #                      # # #      "                      , 0
+l3row14 db "#                 #  #     . . . . . . #   #   #. . . . . . . .  #  #                                                                       #", 0
+l3row15 db "#                 #  #     . . . . . #     #   . #. . . . . .    #  #                   #", 0
+l3row16 db "#                 #  #       . . . # .     #   . . #. . . .      #  #          #", 0
+l3row17 db "#                 #  #         ..#. .      #   . . . #. .        #  #            #", 0
+l3row18 db "#                 #  #      . .# . . .     # . . . . . #         #  #             #", 0
+l3row19 db "#                 #  #                                           #  #. #          #", 0
+l3row20 db "#                 #  # # # # # # # # # #       # # # # # # # # # #  #      . . #          #", 0
+l3row21 db "#                    .                                                     ", 0
+l3row22 db "#                   # # # # # # # # # # # # # # # # # # # # # # #                                                        #", 0
+l3row23 db "#                                                                               #", 0
 l3row25 db "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #", 0
 
 StringLvl db "Level 01 : In the beninging                                                          ", 0
@@ -647,47 +645,26 @@ ret
 GhostCollide ENDP
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
  GhostMoveP1 Proc
+ mov eax, 100
+	call delay
 call UpdateGhost
-cmp xG1, 3
-jle ChangeDirection
-
-cmp yG1, 3
-jle ChangeDirection
-
-
-cmp xG1, 80
-jge ChangeDirection
-
-
-cmp yG1, 25
-jge ChangeDirection
-GhostWallCheck:
-    mov boolisWall, 0
-	mov eax, Offset wallx1 - 1
-	mov edx, Offset wally1 - 1 
-	mov bh, yG1
-	mov ch, xG1
-	call isWall
-	cmp boolisWall, 1
-	je ChangeDirection
-	jmp NormalMove
 
 	ChangeDirection:
 	call Randomize
-	 mov eax, 4
+	 mov eax, 3
     call RandomRange
-    cmp eax, 1
+    cmp eax, 0
 	je Change2Up
 
-	cmp eax, 3
+	cmp eax, 1
 	je Change2Left
 
 
-	cmp eax, 80
+	cmp eax, 2
 	je Change2Down
 
 
-	cmp eax, 25
+	cmp eax, 3
 	je Change2Right
 
 	Change2Up:
@@ -708,8 +685,8 @@ GhostWallCheck:
 
 
 	Change2Right:
-	mov lastyG1, 1
-	mov lastxG1, 0
+	mov lastxG1, 1
+	mov lastyG1, 0
 	jmp NormalMove
 
 
@@ -720,10 +697,43 @@ mov dl, lastyG1
 mov dh, lastxG1
 add xG1, dh
 add yG1, dl
-		
-		
+GhostWallCheck:
+    mov boolisWall, 0
+	mov eax, Offset wallx1 - 1
+	mov edx, Offset wally1 - 1 
+	mov bh, yG1
+	mov ch, xG1
+	call isWall
+	cmp boolisWall, 1
+	je GoBackGhost
+
+	cmp xG1, 3
+	jle Change2Right
+
+	cmp yG1, 3
+	jle Change2Down
+
+
+	cmp xG1, 80
+	jge Change2Left
+
+
+	cmp yG1, 22
+	jge Change2Up
+
+	
+
 call SpawnGhost
 ret
+
+GoBackGhost:
+mov dl, lastyG1
+mov dh, lastxG1
+sub xG1, dh
+sub yG1, dl
+jmp ChangeDirection
+		
+
 
 GhostMoveP1 Endp
 ;;;;;;;;;;;;;;;;;;;
@@ -1017,7 +1027,7 @@ call Clrscr
 	mov dh, 21
 	xor ecx, ecx
 
-
+	 
 	cmp lifecount, 0
 	je GG
 	mov cl, lifecount
@@ -1030,12 +1040,13 @@ call Clrscr
 	mov edx, Offset stryUI
 	call writestring
 	loop HeartLoop
-	;call GhostMoveP1
+	call GhostMoveP1
 	call PacMove
 	call GhostCollide
 	loop gameloop
 	
 	GG:
+	mov lifecount, 3
 	call Clrscr
 	call gameover
 	GGread:
