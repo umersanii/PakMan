@@ -154,7 +154,7 @@ dot db ".", 0
 spaces2 db "                                                                                                          ",0
 Spaces db "                                                                                                              ",0
 xtitleUI db "|                                                                                                              |",0
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;LVL1
 foodx1 db 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 
 foodx2 db 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6 
 foodx3 db 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9 
@@ -216,6 +216,79 @@ twally2 db 75, 9, 21, 33, 51, 57, 59, 61, 63, 65, 67, 69, 75, 9, 21, 33, 51, 57,
 twally3 db 21, 33, 51, 57, 69, 75, 9, 21, 33, 51, 57, 69, 75, 30, 38, 46, 54, 30, 38, 46, 54, 30, 38, 46, 54, 30, 38, 46, 54, 30, 38, 46, 54, 30, 38
 twally4 db 46, 54, 30, 38, 46, 54, 30, 38, 46, 54, 30, 38, 46, 54, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54
 
+tl2wallx1 db 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10
+tl2wallx2 db 10, 10, 10, 10, 10, 10, 11, 11, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 13, 13, 13
+tl2wallx3 db 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 14, 14, 14
+tl2wallx4 db 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 15, 15, 15, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 17
+tl2wallx5 db 17, 17, 17, 17, 18, 18, 18, 18, 18, 19, 19, 19, 19, 19, 20, 20, 20, 21, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;LVL2
+tl2wallcounter db 169
+
+
+tl2wally1 db 11, 13, 15, 17, 43, 69, 71, 73, 75, 11, 43, 75, 11, 43, 75, 11, 23, 43, 63, 75, 23, 41, 43, 45, 63, 23, 41, 43, 45, 63, 17, 19, 21, 23, 41 
+tl2wally2 db 43, 45, 63, 65, 67, 69, 41, 43, 45, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 9, 11, 13
+tl2wally3 db 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77, 21, 23, 25
+tl2wally4 db 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 41, 43, 45, 17, 19, 21, 23, 41, 43, 45, 63, 65, 67, 69, 23
+tl2wally5 db 41, 43, 45, 63, 23, 41, 43, 45, 63, 11, 23, 43, 63, 74, 11, 43, 74, 11, 43, 74, 11, 13, 15, 17, 43, 68, 70, 72, 74
+
+l2wallx1 db 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 8, 8
+l2wallx2 db 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11
+l2wallx3 db 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11
+l2wallx4 db 11, 11, 11, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12
+l2wallx5 db 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12
+l2wallx6 db 12, 12, 12, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13
+l2wallx7 db 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 14, 14, 14, 14, 14, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 16
+l2wallx8 db 16, 16, 16, 16, 16, 16, 17, 17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 19, 19, 19, 20, 20, 20, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21
+l2wallx9 db 21, 21, 21, 21
+
+l2wallcounter dw 284
+
+
+l2wally1 db 10, 11, 12, 13, 14, 15, 16, 42, 68, 69, 70, 71, 72, 73, 74, 10, 42, 74, 10, 42, 74, 10, 22, 42, 62, 74, 22, 40, 41, 42, 43, 44, 62, 22, 40
+l2wally2 db 41, 42, 43, 44, 62, 16, 17, 18, 19, 20, 21, 22, 40, 41, 42, 43, 44, 62, 63, 64, 65, 66, 67, 68, 40, 41, 42, 43, 44, 20, 21, 22, 23, 24, 25
+l2wally3 db 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60
+l2wally4 db 61, 62, 63, 64, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38
+l2wally5 db 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73
+l2wally6 db 74, 75, 76, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51
+l2wally7 db 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 40, 41, 42, 43, 44, 16, 18, 20, 22, 40, 41, 42, 43, 44, 62, 63, 64, 65, 66, 67, 68, 22
+l2wally8 db 40, 41, 42, 43, 44, 62, 22, 40, 41, 42, 43, 44, 62, 10, 22, 42, 62, 73, 10, 42, 73, 10, 42, 73, 10, 11, 12, 13, 14, 15, 16, 42, 67, 68, 69
+l2wally9 db 70, 71, 72, 73
+
+l2foodx1 db 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6
+l2foodx2 db 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+l2foodx3 db 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 14
+l2foodx4 db 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16
+l2foodx5 db 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 18, 18, 18
+l2foodx6 db 18, 18, 18, 18, 18, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 21, 21, 21, 21,
+
+l2foodcounter db 208
+
+
+l2foody1 db 39, 41, 45, 47, 13, 15, 17, 37, 39, 41, 45, 47, 49, 69, 71, 73, 13, 15, 35, 37, 39, 41, 45, 47, 49, 51, 71, 73, 13, 21, 33, 35, 37, 39, 41
+l2foody2 db 45, 47, 49, 51, 53, 65, 73, 19, 21, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 65, 67, 17, 19, 21, 29, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55
+l2foody3 db 57, 65, 67, 69, 27, 29, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 57, 59, 25, 27, 29, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 57, 59, 61, 25
+l2foody4 db 27, 29, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 57, 59, 61, 27, 29, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 57, 59, 17, 19, 21, 29, 31, 33
+l2foody5 db 35, 37, 39, 47, 49, 51, 53, 55, 57, 65, 67, 69, 19, 21, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 65, 67, 13, 21, 33, 35, 37, 39, 41, 45, 47
+l2foody6 db 49, 51, 53, 65, 72, 13, 15, 35, 37, 39, 41, 45, 47, 49, 51, 70, 72, 13, 15, 17, 37, 39, 41, 45, 47, 49, 68, 70, 72, 39, 41, 45, 47
+
+tl2foody1 db 39, 41, 45, 47, 13, 15, 17, 37, 39, 41, 45, 47, 49, 69, 71, 73, 13, 15, 35, 37, 39, 41, 45, 47, 49, 51, 71, 73, 13, 21, 33, 35, 37, 39, 41
+tl2foody2 db 45, 47, 49, 51, 53, 65, 73, 19, 21, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 65, 67, 17, 19, 21, 29, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55
+tl2foody3 db 57, 65, 67, 69, 27, 29, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 57, 59, 25, 27, 29, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 57, 59, 61, 25
+tl2foody4 db 27, 29, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 57, 59, 61, 27, 29, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 57, 59, 17, 19, 21, 29, 31, 33
+tl2foody5 db 35, 37, 39, 47, 49, 51, 53, 55, 57, 65, 67, 69, 19, 21, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 65, 67, 13, 21, 33, 35, 37, 39, 41, 45, 47
+tl2foody6 db 49, 51, 53, 65, 72, 13, 15, 35, 37, 39, 41, 45, 47, 49, 51, 70, 72, 13, 15, 17, 37, 39, 41, 45, 47, 49, 68, 70, 72, 39, 41, 45, 47
+
+tl2foodx1 db 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6
+tl2foodx2 db 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+tl2foodx3 db 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 14
+tl2foodx4 db 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16
+tl2foodx5 db 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 18, 18, 18
+tl2foodx6 db 18, 18, 18, 18, 18, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 21, 21, 21, 21,
+
+
+
+
 foodcountlv1 db 190
 brickcountlv1 db 174
 boolisFood db 0
@@ -233,16 +306,19 @@ outofboundsx db 5 dup(?)
 lastxG1 db 1
 lastyG1 db 1
 
+clvl db 1
+spawnxPac db 79
+spawnyPac db 23
 
 strxUI BYTE "Previous Pak-Men",0
 stryUI db "& ",0
 score BYTE 0
 
 
-xPos BYTE 9
-yPos BYTE 3
+xPos BYTE 10
+yPos BYTE 12
 
-xG1 db 08
+xG1 db 10
 yG1 db 12
 
 inputChar BYTE ?
@@ -255,7 +331,26 @@ PrintBoard PROC
 	mov eax, blue+ (black* 16)
     call SetTextColor
 	mov ecx, 25
+	cmp clvl, 1
+	je level1Board
+
+	cmp clvl, 2
+	je level2Board
+
+	cmp clvl, 3
+	je level3Board
+
+	level1Board:
 	mov edx, OFFSET row1 - 86
+	jmp BoardLoop
+
+	level2Board:
+	mov edx, OFFSET l2row1 - 86
+	jmp BoardLoop
+
+	level3Board:
+	mov edx, OFFSET row1 - 86
+	jmp BoardLoop
 
 	BoardLoop:
 		ADD edx, 86
@@ -360,11 +455,36 @@ PrintxUI ENDP
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 PrintDots PROC
 xor esi, esi
-mov cl,foodcountlv1
-push Offset foodx1 - 1
-push Offset foody1 - 1
 mov eax, yellow+ (black* 16)
-    call SetTextColor
+call SetTextColor
+	cmp clvl, 1
+	je level1Food
+
+	cmp clvl, 2
+	je level2Food
+
+	cmp clvl, 3
+	je level3Food
+
+	level1Food:
+	push Offset foodx1 - 1
+    push Offset foody1 - 1
+	mov cl,foodcountlv1
+
+	jmp DotsLoop
+
+	level2Food:
+	push Offset l2foodx1 - 1
+    push Offset l2foody1 - 1
+	mov cl,l2foodcounter
+
+	jmp DotsLoop
+
+	level3Food:
+	mov edx, OFFSET l2row1 - 86
+	jmp DotsLoop
+
+
 DotsLoop:
 pop eax
 add eax, 1
@@ -396,13 +516,27 @@ isFood Proc
     xor ecx, ecx
     mov ecx, 0
     mov esi, 0  
-	mov eax, Offset tfoodx1 - 1
-	mov edx, Offset tfoody1 - 1 ; esi for loop counter
+	 ; esi for loop counter
 	; esi for loop counter
+	cmp clvl, 1
+	je Foodlvl1
+
+	cmp clvl, 2
+	je Foodlvl2
+
+	Foodlvl1:
+	mov eax, Offset tfoodx1 - 1
+	mov edx, Offset tfoody1 - 1 
+	jmp FoodLoop
+	
+	Foodlvl2:
+	mov eax, Offset tl2foodx1 - 1
+	mov edx, Offset tl2foody1 - 1
+	jmp FoodLoop
 
 FoodLoop:
     cmp cl, foodcountlv1
-    je  endFood      ; Exit loop if all food items checked
+    je  endFood      
 	add eax, 1
 	add edx, 1
     mov bh, ypos
@@ -664,7 +798,24 @@ wiki endp
 isWall PROC
 	
     mov esi, 0  
+	mov bh, ypos
+	mov ch, xpos
+	cmp clvl, 1
+	je Walllvl1
+
+	cmp clvl, 2
+	je Walllvl2
+
+	Walllvl1:
+	mov eax, Offset wallx1 - 1
+	mov edx, Offset wally1 - 1 
+	jmp WallLoop
 	
+	Walllvl2:
+	mov eax, Offset l2wallx1 - 1
+	mov edx, Offset l2wally1 - 1 
+	jmp WallLoop
+
 WallLoop:
     cmp cl, brickcountlv1
     je  endWall   
@@ -734,6 +885,19 @@ INVOKE PlaySound, OFFSET aye, NULL, 0
 Gameover Endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+ResetPac proc
+mov eax, 1500
+call delay
+call UpdatePlayer
+mov dl, spawnxPac
+mov dh, spawnyPac
+mov xpos, dl
+mov ypos, dh
+call drawplayer
+ret
+ResetPac endp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 GhostCollide PROC
 mov bl, xpos
 cmp xG1, bl
@@ -746,13 +910,14 @@ je DecLife
 ret
 DecLife:
 dec lifecount
+call ResetPac
 ret
 GhostCollide ENDP
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
  GhostMoveP1 Proc
  mov eax, 100
 	call delay
-call UpdateGhost
+    call UpdateGhost
 	cmp xG1, 7
 	jle tp
 
@@ -886,10 +1051,10 @@ mov dl, xPos
 		dec dh
 		dec yPos
 		mov boolisWall, 0
-		mov eax, Offset wallx1 - 1
-		mov edx, Offset wally1 - 1 
 		mov bh, ypos
 		mov ch, xpos
+		mov eax, Offset wallx1 - 1
+		mov edx, Offset wally1 - 1 
 		call isWall
 		cmp boolisWall, 1
 		je DeltaUpBack
@@ -1109,7 +1274,9 @@ lvl01complete endp
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 misc proc
-cmp scorecounter, foodcountlvl1
+mov bl, foodcountlv1
+    ;cmp scorecounter, bl
+	cmp scorecounter, 100
 	je LvlComplete
 	
 	mov eax, 100
@@ -1161,11 +1328,13 @@ cmp scorecounter, foodcountlvl1
 	jmp GGread
 
 	LvlComplete:
+	inc clvl
 	call Clrscr
 	call lvl01complete
 	call readchar
 	cmp al, 'e'
-	je titleContinue
+	mov boolmisc, 2
+	ret
 
 	titleContinue:
 	mov boolmisc, 0
@@ -1177,8 +1346,11 @@ cmp scorecounter, foodcountlvl1
 
 misc endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 main PROC
-
+mov clvl, 2
+jmp play
 titleContinue1:
 call Clrscr
 call titleScreen
@@ -1216,6 +1388,7 @@ call Clrscr
 	call DrawPlayer
 
 	call SpawnGhost
+
 	gameLoop:
 	mov boolmisc, -1
 	call Misc
@@ -1223,8 +1396,10 @@ call Clrscr
 	je titleContinue1
 	cmp boolmisc, 1
 	je wikiHome1
+	cmp boolmisc, 2
+	je play
 
-	call GhostMoveP1
+	;call GhostMoveP1
 	call PacMove
 	call GhostCollide
 	loop gameloop
