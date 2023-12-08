@@ -18,6 +18,10 @@ boolmisc db -1
 aye         db 'aye.wav',0 
 ScoreSound  db 'Food.wav',0
 titleSound  db 'title.wav',0
+lvl1sfx     db 'Lvl1.wav', 0
+lvl2sfx     db 'Lvl2.wav', 0
+lvl3sfx     db 'Lvl3.wav', 0
+
 
 
 lvl1GhostRandomMovementy db 11, 11, 11, 6
@@ -179,7 +183,7 @@ foodx4 db 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 1
 foodx5 db 13, 13, 14, 14, 14, 14, 14, 14, 15, 15, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16, 17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 19, 19, 19
 foodx6 db 19, 19, 19, 20, 20, 20, 20, 20, 20, 21, 21, 21, 21, 21, 21, -1
 
-
+dotscounterlvl1 dw 190
 
 foody1 db 10, 12, 14, 16, 18, 22, 24, 26, 28, 30, 52, 54, 56, 58, 60, 62, 64, 66, 68, 70, 72, 10, 12, 14, 16, 18, 22, 24, 26, 28, 30, 52, 54, 56, 58
 foody2 db 60, 62, 64, 66, 68, 70, 72, 10, 12, 14, 16, 18, 22, 24, 26, 28, 30, 52, 54, 70, 72, 10, 12, 14, 16, 18, 22, 24, 26, 28, 30, 52, 54, 61, 63
@@ -278,7 +282,7 @@ l2foodx3 db 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10
 l2foodx4 db 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16
 l2foodx5 db 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 18, 18, 18
 l2foodx6 db 18, 18, 18, 18, 18, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 21, 21, 21, 21, -1
-l2foodcounter db 208
+dotscounterlvl2 dw 208
 l2foody1 db 38, 40, 44, 46, 12, 14, 16, 36, 38, 40, 44, 46, 48, 68, 70, 72, 12, 14, 34, 36, 38, 40, 44, 46, 48, 50, 70, 72, 12, 20, 32, 34, 36, 38, 40
 l2foody2 db 44, 46, 48, 50, 52, 64, 72, 18, 20, 30, 32, 34, 36, 38, 46, 48, 50, 52, 54, 64, 66, 16, 18, 20, 28, 30, 32, 34, 36, 38, 46, 48, 50, 52, 54
 l2foody3 db 56, 64, 66, 68, 26, 28, 30, 32, 34, 36, 38, 46, 48, 50, 52, 54, 56, 58, 24, 26, 28, 30, 32, 34, 36, 38, 46, 48, 50, 52, 54, 56, 58, 60, 24
@@ -391,7 +395,7 @@ tl3foody11 db 18, 42, 66, 68, 69, 70, 71, 72, 75, 77, 78, 79, 5, 6, 7, 9, 20, 22
 tl3foody12 db 62, 64, 75, 77, 78, 79, 5, 6, 7, 9, 75, 77, 78, 79, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58
 tl3foody13 db 60, 62, 64,
 
-foodcount dw 190, 208, 420
+foodcount word 190, 208, 420
 
 foodcountlv1 db 190
 brickcountlv1 db 174
@@ -399,7 +403,7 @@ boolisFood db 0
 boolisWall db 0
 lifecount db 3
 
-scorecounter db 0
+scorecounter dw 0
 lastposx db 1
 lastposy db 0
 boolLastMove db 4
@@ -611,7 +615,7 @@ call SetTextColor
 	level2Food:
 	push Offset l2foodx1 - 1
     push Offset l2foody1 - 1
-	mov cl,l2foodcounter
+;	mov cl,l2foodcounter
 
 	jmp DotsLoop
 
@@ -1059,7 +1063,7 @@ loop TitleLoop
 mov edx, Offset sgameover7
 CALL writestring
 mov eax, 0
-mov al, scorecounter
+mov ax, scorecounter
 call WriteDec
 mov dh, 19
 mov dl, 30
@@ -1127,8 +1131,9 @@ jne GhostCollideLoop
 ret
 DecLife:
 dec lifecount
-call ResetPac
 INVOKE PlaySound, OFFSET aye, NULL, 0
+call ResetPac
+
 
 ret
 GhostCollide ENDP
@@ -1573,17 +1578,35 @@ lvl02complete endp
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 misc proc
-mov bl, foodcountlv1
-    ;cmp scorecounter, bl
-	cmp scorecounter, 100
-	je LvlComplete
+mov esi, 0
+movzx esi, clvl
+
+cmp clvl, 1
+je misclvl1
+
+cmp clvl, 2
+je misclvl2
+
+cmp clvl, 2
+je misclvl3
+
+misclvl1:
+mov ax, dotscounterlvl1
+misclvl2:
+mov ax, dotscounterlvl1
+
+misclvl3:
+mov ax, dotscounterlvl1
+
+cmp scorecounter, ax
+je lvlcomplete
 	
 	mov eax, 100
 	call delay
 	mov dl, 0
 	mov dh, 25
 	call gotoxy
-	mov al, scorecounter
+	mov ax, scorecounter
 	call WriteDec
 	mov dl, 80
 	mov dh, 25
@@ -1627,7 +1650,6 @@ mov bl, foodcountlv1
 	jmp GGread
 
 	LvlComplete:
-	inc clvl
 	call Clrscr
 	cmp clvl, 1
 	je lvl01
@@ -1635,18 +1657,33 @@ mov bl, foodcountlv1
 
 	cmp clvl, 2
 	je lvl02
-	call lvl02complete
+
+	cmp clvl, 3
+	je lvl03
 	jmp continueLvlComplete
 
 	lvl01:
 	call lvl01complete
+	INVOKE PlaySound, OFFSET lvl1sfx, NULL, 11h
 	jmp continueLvlComplete
+
 
 	lvl02:
 	call lvl02complete
+	INVOKE PlaySound, OFFSET lvl2sfx, NULL, 11h
 	jmp continueLvlComplete
 
+	lvl03:
+	;call lvl03complete
+	INVOKE PlaySound, OFFSET lvl3sfx, NULL, 11h
+
+	jmp continueLvlComplete
+
+
+
+
 	continueLvlComplete:
+	inc clvl
 	call readchar
 	cmp al, 'e'
 	mov boolmisc, 2
@@ -1696,7 +1733,7 @@ je play
 jmp wikiHome1
 play:
 
-call Clrscr
+    call Clrscr
 	call PrintBoard
 	call PrintDots
 
