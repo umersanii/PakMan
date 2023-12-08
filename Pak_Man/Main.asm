@@ -16,7 +16,9 @@ boolWallCollison db 0
 boolmisc db -1
 
 aye         db 'aye.wav',0 
-ScoreSound  db 'Food.wav'
+ScoreSound  db 'Food.wav',0
+titleSound  db 'title.wav',0
+
 
 lvl1GhostRandomMovementy db 11, 11, 11, 6
 lvl1GhostRandomMovementx db 25, 42, 70, 42
@@ -277,19 +279,19 @@ l2foodx4 db 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 15, 15, 
 l2foodx5 db 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 18, 18, 18
 l2foodx6 db 18, 18, 18, 18, 18, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 21, 21, 21, 21, -1
 l2foodcounter db 208
-l2foody1 db 39, 41, 45, 47, 13, 15, 17, 37, 39, 41, 45, 47, 49, 69, 71, 73, 13, 15, 35, 37, 39, 41, 45, 47, 49, 51, 71, 73, 13, 21, 33, 35, 37, 39, 41
-l2foody2 db 45, 47, 49, 51, 53, 65, 73, 19, 21, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 65, 67, 17, 19, 21, 29, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55
-l2foody3 db 57, 65, 67, 69, 27, 29, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 57, 59, 25, 27, 29, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 57, 59, 61, 25
-l2foody4 db 27, 29, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 57, 59, 61, 27, 29, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 57, 59, 17, 19, 21, 29, 31, 33
-l2foody5 db 35, 37, 39, 47, 49, 51, 53, 55, 57, 65, 67, 69, 19, 21, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 65, 67, 13, 21, 33, 35, 37, 39, 41, 45, 47
-l2foody6 db 49, 51, 53, 65, 72, 13, 15, 35, 37, 39, 41, 45, 47, 49, 51, 70, 72, 13, 15, 17, 37, 39, 41, 45, 47, 49, 68, 70, 72, 39, 41, 45, 47, -1
+l2foody1 db 38, 40, 44, 46, 12, 14, 16, 36, 38, 40, 44, 46, 48, 68, 70, 72, 12, 14, 34, 36, 38, 40, 44, 46, 48, 50, 70, 72, 12, 20, 32, 34, 36, 38, 40
+l2foody2 db 44, 46, 48, 50, 52, 64, 72, 18, 20, 30, 32, 34, 36, 38, 46, 48, 50, 52, 54, 64, 66, 16, 18, 20, 28, 30, 32, 34, 36, 38, 46, 48, 50, 52, 54
+l2foody3 db 56, 64, 66, 68, 26, 28, 30, 32, 34, 36, 38, 46, 48, 50, 52, 54, 56, 58, 24, 26, 28, 30, 32, 34, 36, 38, 46, 48, 50, 52, 54, 56, 58, 60, 24
+l2foody4 db 26, 28, 30, 32, 34, 36, 38, 46, 48, 50, 52, 54, 56, 58, 60, 26, 28, 30, 32, 34, 36, 38, 46, 48, 50, 52, 54, 56, 58, 16, 18, 20, 28, 30, 32
+l2foody5 db 34, 36, 38, 46, 48, 50, 52, 54, 56, 64, 66, 68, 18, 20, 30, 32, 34, 36, 38, 46, 48, 50, 52, 54, 64, 66, 12, 20, 32, 34, 36, 38, 40, 44, 46
+l2foody6 db 48, 50, 52, 64, 71, 12, 14, 34, 36, 38, 40, 44, 46, 48, 50, 69, 71, 12, 14, 16, 36, 38, 40, 44, 46, 48, 67, 69, 71, 38, 40, 44, 46, -1
 
-tl2foody1 db 39, 41, 45, 47, 13, 15, 17, 37, 39, 41, 45, 47, 49, 69, 71, 73, 13, 15, 35, 37, 39, 41, 45, 47, 49, 51, 71, 73, 13, 21, 33, 35, 37, 39, 41
-tl2foody2 db 45, 47, 49, 51, 53, 65, 73, 19, 21, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 65, 67, 17, 19, 21, 29, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55
-tl2foody3 db 57, 65, 67, 69, 27, 29, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 57, 59, 25, 27, 29, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 57, 59, 61, 25
-tl2foody4 db 27, 29, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 57, 59, 61, 27, 29, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 57, 59, 17, 19, 21, 29, 31, 33
-tl2foody5 db 35, 37, 39, 47, 49, 51, 53, 55, 57, 65, 67, 69, 19, 21, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 65, 67, 13, 21, 33, 35, 37, 39, 41, 45, 47
-tl2foody6 db 49, 51, 53, 65, 72, 13, 15, 35, 37, 39, 41, 45, 47, 49, 51, 70, 72, 13, 15, 17, 37, 39, 41, 45, 47, 49, 68, 70, 72, 39, 41, 45, 47
+tl2foody1 db 38, 40, 44, 46, 12, 14, 16, 36, 38, 40, 44, 46, 48, 68, 70, 72, 12, 14, 34, 36, 38, 40, 44, 46, 48, 50, 70, 72, 12, 20, 32, 34, 36, 38, 40
+tl2foody2 db 44, 46, 48, 50, 52, 64, 72, 18, 20, 30, 32, 34, 36, 38, 46, 48, 50, 52, 54, 64, 66, 16, 18, 20, 28, 30, 32, 34, 36, 38, 46, 48, 50, 52, 54
+tl2foody3 db 56, 64, 66, 68, 26, 28, 30, 32, 34, 36, 38, 46, 48, 50, 52, 54, 56, 58, 24, 26, 28, 30, 32, 34, 36, 38, 46, 48, 50, 52, 54, 56, 58, 60, 24
+tl2foody4 db 26, 28, 30, 32, 34, 36, 38, 46, 48, 50, 52, 54, 56, 58, 60, 26, 28, 30, 32, 34, 36, 38, 46, 48, 50, 52, 54, 56, 58, 16, 18, 20, 28, 30, 32
+tl2foody5 db 34, 36, 38, 46, 48, 50, 52, 54, 56, 64, 66, 68, 18, 20, 30, 32, 34, 36, 38, 46, 48, 50, 52, 54, 64, 66, 12, 20, 32, 34, 36, 38, 40, 44, 46
+tl2foody6 db 48, 50, 52, 64, 71, 12, 14, 34, 36, 38, 40, 44, 46, 48, 50, 69, 71, 12, 14, 16, 36, 38, 40, 44, 46, 48, 67, 69, 71, 38, 40, 44, 46, -1
 
 tl2foodx1 db 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6
 tl2foodx2 db 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
@@ -318,19 +320,19 @@ l3foodx13 db 23, 23, 23, -1
 
 l3foodcounter dw 420
 
-l3foody1 db 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 6, 7, 8, 10, 76, 78, 79, 80, 6, 7, 8
-l3foody2 db 10, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 76, 78, 79, 80, 6, 7, 8, 10, 13, 14, 15
-l3foody3 db 16, 17, 19, 43, 67, 69, 70, 71, 72, 73, 76, 78, 79, 80, 10, 15, 19, 32, 43, 54, 67, 71, 76, 10, 15, 19, 31, 35, 37, 39, 41, 45, 47, 49, 51
-l3foody4 db 55, 67, 71, 76, 10, 15, 19, 29, 31, 33, 37, 39, 41, 45, 47, 49, 53, 55, 57, 67, 71, 76, 8, 15, 19, 27, 29, 31, 33, 35, 39, 41, 45, 47, 51
-l3foody5 db 53, 55, 57, 59, 67, 71, 78, 6, 15, 19, 25, 27, 29, 31, 33, 35, 37, 41, 45, 49, 51, 53, 55, 57, 59, 61, 67, 71, 80, 4, 15, 19, 25, 27, 29
-l3foody6 db 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 57, 59, 61, 67, 71, 82, 3, 15, 19, 21, 23, 25, 27, 59, 61, 63, 65, 67, 71, 83, 4, 15, 19, 21, 23
-l3foody7 db 25, 27, 59, 61, 63, 65, 67, 71, 82, 6, 15, 19, 25, 27, 29, 31, 33, 35, 37, 39, 47, 49, 51, 53, 55, 57, 59, 61, 67, 71, 80, 8, 15, 19, 27
-l3foody8 db 29, 31, 33, 35, 37, 41, 45, 49, 51, 53, 55, 57, 59, 61, 67, 71, 78, 10, 15, 19, 27, 29, 31, 33, 35, 39, 41, 45, 47, 51, 53, 55, 57, 59, 67
-l3foody9 db 71, 76, 10, 15, 19, 29, 31, 33, 37, 39, 41, 45, 47, 49, 53, 55, 57, 67, 71, 76, 10, 15, 19, 31, 35, 37, 39, 41, 45, 47, 49, 51, 55, 67, 71
-l3foody10 db 76, 10, 15, 19, 33, 35, 37, 39, 41, 45, 47, 49, 51, 53, 67, 71, 76, 10, 15, 19, 29, 43, 57, 67, 71, 76, 6, 7, 8, 10, 13, 14, 15, 16, 17
-l3foody11 db 19, 43, 67, 69, 70, 71, 72, 73, 76, 78, 79, 80, 6, 7, 8, 10, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 43, 47, 49, 51, 53, 55, 57, 59, 61
-l3foody12 db 63, 65, 76, 78, 79, 80, 6, 7, 8, 10, 76, 78, 79, 80, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59
-l3foody13 db 61, 63, 65, -1
+l3foody1 db 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64, 5, 6, 7, 9, 75, 77, 78, 79, 5, 6, 7
+l3foody2 db 9, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64, 75, 77, 78, 79, 5, 6, 7, 9, 12, 13, 14
+l3foody3 db 15, 16, 18, 42, 66, 68, 69, 70, 71, 72, 75, 77, 78, 79, 9, 14, 18, 31, 42, 53, 66, 70, 75, 9, 14, 18, 30, 34, 36, 38, 40, 44, 46, 48, 50
+l3foody4 db 54, 66, 70, 75, 9, 14, 18, 28, 30, 32, 36, 38, 40, 44, 46, 48, 52, 54, 56, 66, 70, 75, 7, 14, 18, 26, 28, 30, 32, 34, 38, 40, 44, 46, 50
+l3foody5 db 52, 54, 56, 58, 66, 70, 77, 5, 14, 18, 24, 26, 28, 30, 32, 34, 36, 40, 44, 48, 50, 52, 54, 56, 58, 60, 66, 70, 79, 3, 14, 18, 24, 26, 28
+l3foody6 db 30, 32, 34, 36, 38, 46, 48, 50, 52, 54, 56, 58, 60, 66, 70, 81, 2, 14, 18, 20, 22, 24, 26, 58, 60, 62, 64, 66, 70, 82, 3, 14, 18, 20, 22
+l3foody7 db 24, 26, 58, 60, 62, 64, 66, 70, 81, 5, 14, 18, 24, 26, 28, 30, 32, 34, 36, 38, 46, 48, 50, 52, 54, 56, 58, 60, 66, 70, 79, 7, 14, 18, 26
+l3foody8 db 28, 30, 32, 34, 36, 40, 44, 48, 50, 52, 54, 56, 58, 60, 66, 70, 77, 9, 14, 18, 26, 28, 30, 32, 34, 38, 40, 44, 46, 50, 52, 54, 56, 58, 66
+l3foody9 db 70, 75, 9, 14, 18, 28, 30, 32, 36, 38, 40, 44, 46, 48, 52, 54, 56, 66, 70, 75, 9, 14, 18, 30, 34, 36, 38, 40, 44, 46, 48, 50, 54, 66, 70
+l3foody10 db 75, 9, 14, 18, 32, 34, 36, 38, 40, 44, 46, 48, 50, 52, 66, 70, 75, 9, 14, 18, 28, 42, 56, 66, 70, 75, 5, 6, 7, 9, 12, 13, 14, 15, 16
+l3foody11 db 18, 42, 66, 68, 69, 70, 71, 72, 75, 77, 78, 79, 5, 6, 7, 9, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 42, 46, 48, 50, 52, 54, 56, 58, 60
+l3foody12 db 62, 64, 75, 77, 78, 79, 5, 6, 7, 9, 75, 77, 78, 79, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58
+l3foody13 db 60, 62, 64, -1
 
 
 l3wallx1 db 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
@@ -361,6 +363,35 @@ l3wally11 db 34, 35, 36, 37, 38, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
 l3wally12 db 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58
 l3wally13 db 59, 60, 61, 62, 63, 64, 73, -1
 
+tl3foodx1 db 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3
+tl3foodx2 db 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4
+tl3foodx3 db 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6
+tl3foodx4 db 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+tl3foodx5 db 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10
+tl3foodx6 db 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12
+tl3foodx7 db 12, 12, 12, 12, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 14, 14, 14, 14
+tl3foodx8 db 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15
+tl3foodx9 db 15, 15, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17
+tl3foodx10 db 17, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 19, 19, 19, 19, 19, 19, 19, 19, 19, 20, 20, 20, 20, 20, 20, 20, 20, 20
+tl3foodx11 db 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21
+tl3foodx12 db 21, 21, 21, 21, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23
+tl3foodx13 db 23, 23, 23, -1 
+
+tl3foody1 db 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64, 5, 6, 7, 9, 75, 77, 78, 79, 5, 6, 7
+tl3foody2 db 9, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64, 75, 77, 78, 79, 5, 6, 7, 9, 12, 13, 14
+tl3foody3 db 15, 16, 18, 42, 66, 68, 69, 70, 71, 72, 75, 77, 78, 79, 9, 14, 18, 31, 42, 53, 66, 70, 75, 9, 14, 18, 30, 34, 36, 38, 40, 44, 46, 48, 50
+tl3foody4 db 54, 66, 70, 75, 9, 14, 18, 28, 30, 32, 36, 38, 40, 44, 46, 48, 52, 54, 56, 66, 70, 75, 7, 14, 18, 26, 28, 30, 32, 34, 38, 40, 44, 46, 50
+tl3foody5 db 52, 54, 56, 58, 66, 70, 77, 5, 14, 18, 24, 26, 28, 30, 32, 34, 36, 40, 44, 48, 50, 52, 54, 56, 58, 60, 66, 70, 79, 3, 14, 18, 24, 26, 28
+tl3foody6 db 30, 32, 34, 36, 38, 46, 48, 50, 52, 54, 56, 58, 60, 66, 70, 81, 2, 14, 18, 20, 22, 24, 26, 58, 60, 62, 64, 66, 70, 82, 3, 14, 18, 20, 22
+tl3foody7 db 24, 26, 58, 60, 62, 64, 66, 70, 81, 5, 14, 18, 24, 26, 28, 30, 32, 34, 36, 38, 46, 48, 50, 52, 54, 56, 58, 60, 66, 70, 79, 7, 14, 18, 26
+tl3foody8 db 28, 30, 32, 34, 36, 40, 44, 48, 50, 52, 54, 56, 58, 60, 66, 70, 77, 9, 14, 18, 26, 28, 30, 32, 34, 38, 40, 44, 46, 50, 52, 54, 56, 58, 66
+tl3foody9 db 70, 75, 9, 14, 18, 28, 30, 32, 36, 38, 40, 44, 46, 48, 52, 54, 56, 66, 70, 75, 9, 14, 18, 30, 34, 36, 38, 40, 44, 46, 48, 50, 54, 66, 70
+tl3foody10 db 75, 9, 14, 18, 32, 34, 36, 38, 40, 44, 46, 48, 50, 52, 66, 70, 75, 9, 14, 18, 28, 42, 56, 66, 70, 75, 5, 6, 7, 9, 12, 13, 14, 15, 16
+tl3foody11 db 18, 42, 66, 68, 69, 70, 71, 72, 75, 77, 78, 79, 5, 6, 7, 9, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 42, 46, 48, 50, 52, 54, 56, 58, 60
+tl3foody12 db 62, 64, 75, 77, 78, 79, 5, 6, 7, 9, 75, 77, 78, 79, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58
+tl3foody13 db 60, 62, 64,
+
+foodcount dw 190, 208, 420
 
 foodcountlv1 db 190
 brickcountlv1 db 174
@@ -376,9 +407,39 @@ boolLastMove db 4
 outofboundsy db 5 dup(?) 
 outofboundsx db 5 dup(?) 
 
+;141
 GhostSpeedtick db 1
-lastxG1 db 1
-lastyG1 db 1
+
+
+xG db 4 dup(?) 
+yG db 4 dup(?) 
+
+lastxG db  -1, 1, 0, 0
+lastyG db  0 , 0 , 1, -1
+
+assymptoteLEFT db 7, 3, 21
+assymptoteUP db 3, 3, 21
+assymptoteDOWN db 21, 3, 21
+assymptoteRIGHT db 80, 3, 21
+
+boolGSpawn db 0
+tickGhost db 0
+;Gaz
+GazSpawnx db 25, 79, 79
+GazSpawny db 10, 23, 23
+
+;Price
+PriceSpawnx db -1, 23, 23
+PriceSpawny db -1, 23, 23
+
+;Soap
+SoapSpawnx db -1, 45, 23
+SoapSpawny db -1, 10, 10
+
+;Ghost
+GhostSpawnx db -1, -1, 79
+GhostSpawny db -1, -1, 10
+
 
 clvl db 1
 spawnxPac db 79
@@ -670,7 +731,7 @@ FoodLoopG:
     cmp bl, -1
     je  endFoodG      
 
-    cmp cl, bl
+    cmp ch, bl
 
     je  ifFoodG
 continueFoodG:
@@ -681,13 +742,13 @@ continueFoodG:
 ifFoodG:
     mov bl, [edx]
 	;dec bl
-    cmp bl, ch
+    cmp bl, cl
 
     je  elseifFoodG
     jmp continueFoodG
 
 elseifFoodG:
-    mov boolisFood, 0
+    mov boolisFood, 1
 	;INVOKE PlaySound, OFFSET ScoreSound, NULL, 11h
 
     jmp endFoodG
@@ -822,7 +883,7 @@ mov dl, 3
 call gotoxy
 pop edx
 loop TitleLoop
-INVOKE PlaySound, OFFSET aye, NULL, 0
+INVOKE PlaySound, OFFSET titlesound, NULL, 0
 
 ret
 titleScreen endp
@@ -916,9 +977,8 @@ isWall endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 isWallG PROC
 	
-    mov esi, 0  
-	mov bh, yG1
-	mov ch, xG1
+     mov esi, 0  
+
 	cmp clvl, 1
 	je Walllvl1G
 
@@ -947,15 +1007,14 @@ isWallG PROC
 WallLoopG:
 	mov bl, [eax]
     cmp bl, -1
-    je  endWallG
+    je  endWallG   
 	add eax, 1
-    cmp bh, bl
+    cmp ch, bl
     je  ifWallG
 	add edx, 1
 
 continueWallG:
 
-    inc cl
     jmp WallLoopG
 
 ifWallG:
@@ -963,7 +1022,7 @@ ifWallG:
 	add edx, 1
 
 	
-    cmp ch, bl
+    cmp cl, bl
 
     je  elseifWallG
     jmp continueWallG
@@ -1015,8 +1074,6 @@ Gameover Endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ResetPac proc
-mov eax, 1500
-call delay
 call UpdatePlayer
 mov dl, spawnxPac
 mov dh, spawnyPac
@@ -1028,38 +1085,130 @@ ResetPac endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 GhostCollide PROC
-mov bl, xpos
-cmp xG1, bl
+mov esi, 0
+cmp clvl, 1
+je GhostCollidelvl1
+
+cmp clvl, 2
+je GhostCollidelvl2
+
+cmp clvl, 3
+je GhostCollidelvl3
+
+GhostCollidelvl1:
+mov ecx, 1
+jmp GhostCollideLoop
+
+GhostCollidelvl2:
+mov ecx, 3
+jmp GhostCollideLoop
+
+GhostCollidelvl3:
+mov ecx, 4
+jmp GhostCollideLoop
+
+
+GhostCollideLoop:
+mov bl, xG[esi]
+cmp xpos, bl
 je ifGhostCollide
+inc esi
+loop GhostCollideLoop
 ret
+
+
 ifGhostCollide:
-mov bh, ypos
-cmp yG1, bh
+dec ecx
+mov bh, yG[esi]
+cmp ypos, bh
 je DecLife
+cmp ecx, 0
+jne GhostCollideLoop
 ret
 DecLife:
 dec lifecount
 call ResetPac
+INVOKE PlaySound, OFFSET aye, NULL, 0
+
 ret
 GhostCollide ENDP
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
  GhostMoveP1 Proc
+ 	mov cl, xG[edi]
+	mov ch, yG[edi]
     call UpdateGhost
-	cmp xG1, 7
+	mov esi, 0
+	movzx esi, clvl
+	dec esi
+	mov al, assymptoteLEFT[esi]
+	cmp xG[edi], al
 	jle tp
 
-	cmp yG1, 3
+	mov al, assymptoteUP[esi]
+	cmp yG[edi], al
 	jle tp
 
-
-	cmp xG1, 80
+	mov al, assymptoteRIGHT[esi]
+	cmp xG[edi], al
 	jge tp
 
-
-	cmp yG1, 22
+	mov al, assymptoteDOWN[esi]
+	cmp yG[edi], al
 	jge tp
+	jmp NormalMove
+
+	tp:
+	call Randomize
+	 mov eax, 3
+    call RandomRange
+	mov dl, BYTE PTR lvl1GhostRandomMovementy[eax]
+	mov yG[edi], dl
+	mov dh, BYTE PTR lvl1GhostRandomMovementx[eax]
+	mov xG[edi], dh
+	jmp NormalMove
+
+	ResetDirection:
+	
+	cmp edi, 0
+	je GazChange
+	cmp edi, 1
+	je PriceChange
+	cmp edi, 2
+	je SoapChange
+	cmp edi, 3
+	je GhostChange
+
+	GazChange:
+	mov al, GazSpawnx[esi]
+	mov xG[edi], al
+	mov al, GazSpawny[esi]
+	mov yG[edi], al
+	jmp ChangeDirection
+
+
+	PriceChange:
+	mov al, PriceSpawnx[esi]
+	mov xG[edi], al
+	mov al, PriceSpawny[esi]
+	mov yG[edi], al
+	jmp ChangeDirection
+
+	SoapChange:
+	mov al, SoapSpawnx[esi]
+	mov xG[edi], al
+	mov al, SoapSpawny[esi]
+	mov yG[edi], al
+	jmp ChangeDirection
+
+	GhostChange:
+	mov al, GhostSpawnx[esi]
+	mov xG[edi], al
+	mov al, GhostSpawny[esi]
+	mov yG[edi], al
+	jmp ChangeDirection
 
 	ChangeDirection:
+	mov tickghost, 0
 	call Randomize
 	 mov eax, 3
     call RandomRange
@@ -1078,70 +1227,66 @@ GhostCollide ENDP
 	je Change2Right
 
 	Change2Up:
-	mov lastyG1, 1
-	mov lastxG1, 0
+	mov lastyG[edi], 1
+	mov lastxG[edi], 0
 	jmp NormalMove
 
 	Change2Down:
-	mov lastyG1, -1
-	mov lastxG1, 0
+	mov lastyG[edi], -1
+	mov lastxG[edi], 0
 	jmp NormalMove
 
 
 	Change2Left:
-	mov lastyG1, 0
-	mov lastxG1, -1
+	mov lastyG[edi], 0
+	mov lastxG[edi], -1
 	jmp NormalMove
 
 
 	Change2Right:
-	mov lastxG1, 1
-	mov lastyG1, 0
+	mov lastxG[edi], 1
+	mov lastyG[edi], 0
 	jmp NormalMove
 
-	tp:
-	call Randomize
-	 mov eax, 3
-    call RandomRange
-	mov dl, BYTE PTR lvl1GhostRandomMovementy[eax]
-	mov yG1, dl
-	mov dh, BYTE PTR lvl1GhostRandomMovementx[eax]
-	mov xG1, dh
-	jmp NormalMove
+	
+
+
 
 
 
 
 NormalMove:
-mov dl, lastyG1
-mov dh, lastxG1
-add xG1, dh
-add yG1, dl
+mov al, tickghost
+cmp al, 3
+je changedirection
+mov dl, lastyG[edi]
+mov dh, lastxG[edi]
+add xG[edi], dh
+add yG[edi], dl
 jmp	GhostWallCheck
 GhostWallCheck:
     mov boolisWall, 0
-	mov eax, Offset twallx1 - 1
-	mov edx, Offset twally1 - 1 
-	
-	mov bh, yG1
-	mov ch, xG1
+	mov ch, yG[edi]
+	mov cl, xG[edi]
 	call isWallG
 	cmp boolisWall, 1
 	je yesyesyes
-
 	jmp RetGhost
 
 	
-	RetGhost:
-call SpawnGhost
-ret
+RetGhost:
+	mov dl, yG[edi]
+	mov dh, xG[edi]
+    call SpawnGhost
+	inc tickghost
+    ret
 
 	yesyesyes:
 	je GoBackGhost
 
 GoBackGhost:
-mov dl, lastyG1
-mov dh, lastxG1
+mov dl, lastyG[edi]
+mov dh, lastxG[edi]
 sub xG1, dh
 sub yG1, dl
 jmp ChangeDirection
@@ -1152,7 +1297,7 @@ GhostMoveP1 Endp
 ;;;;;;;;;;;;;;;;;;;
 
 PacMove Proc
-mov dl, xPos
+	mov dl, xPos
 	mov dh, yPos
 	CALL GoToXY
 	mov eax, 0
@@ -1559,9 +1704,9 @@ call Clrscr
 	
     
 	call DrawPlayer
-
+	mov boolGSpawn, 1
 	call SpawnGhost
-
+	mov boolGSpawn, 0
 	gameLoop:
 	mov eax, 50
 	call delay
@@ -1593,27 +1738,33 @@ cmp clvl, 3
 je GMovelvl3
 
 GMovelvl1:
+mov ch, xG[0]
+mov cl, yG[0]
 cmp GhostSpeedTick, 1
-call GMoveP1
+mov edi, 0
+call GMoveMove
 ret
 
 GMovelvl2:
 cmp GhostSpeedTick, 1
-call GMoveP1
+call GMoveMove
 
 cmp GhostSpeedTick, 2
-call GMoveP1
+call GMoveMove
 ret
 GMovelvl3:
 cmp GhostSpeedTick, 1
-call GMoveP1
+call GMoveMove
 
 cmp GhostSpeedTick, 2
-call GMoveP1
+call GMoveMove
 
 cmp GhostSpeedTick, 3
-call GMoveP1
+call GMoveMove
+GhostMove endp
 
+
+GMoveMove proc
 GMoveP1:
 cmp GhostSpeedTick, 3
 je TickReset
@@ -1623,7 +1774,7 @@ TickReset:
 mov GhostSpeedTick, 0
 call GhostMoveP1
 ret
-GhostMove endp
+GMoveMove endp
 DrawPlayer PROC
 	; draw player at (xPos,yPos):
 	 mov eax, white + (Black* 16)
@@ -1649,21 +1800,15 @@ UpdatePlayer PROC
 UpdatePlayer ENDP
 
 UpdateGhost PROC
-	mov dl,xG1
-	mov dh,yG1
+	mov dh,ch
+	mov dl,cl
 	call Gotoxy
-	mov boolisWall, 0
-	mov eax, Offset wallx1 - 1
-	mov edx, Offset wally1 - 1 
-	mov bh, yG1
-	mov ch, xG1
-	call isWall
+	mov boolisWall, 0 
+	call isWallG
 	cmp boolisWall, 1
 	je WallinUpdate
 	
 	mov boolisFood, 0
-	mov ch, xG1
-    mov cl, yG1
 	call isFoodG
 	cmp boolisFood, 1
 	je FoodinUpdate
@@ -1693,8 +1838,143 @@ UpdateGhost PROC
 UpdateGhost ENDP
 
 SpawnGhost PROC
-	mov dl,xG1
-	mov dh,yG1
+	cmp boolGSpawn, 1
+	je GSpawnStart
+	jmp ElseSpawnGhost
+
+	GSpawnStart:
+	cmp clvl, 1
+	je GSpawn1
+
+	cmp clvl, 2
+	je GSpawn2
+
+	cmp clvl, 3
+	je GSpawn3
+
+GSpawn1:
+	mov bl, GazSpawnx[0]
+	mov bh, GazSpawny[0]
+
+	mov xG[0], bl
+	mov yG[0], bh
+
+	mov dl,xG[0]
+	mov dh,yG[0]
+	call Gotoxy
+	mov eax, Blue + (Black* 16)
+    call SetTextColor
+	mov al, 232
+	call WriteChar
+	ret
+
+
+
+GSpawn2:
+	mov bl, GazSpawnx[1]
+	mov bh, GazSpawny[1]
+
+	mov xG[0], bl
+	mov yG[0], bh
+
+	mov dl,xG[0]
+	mov dh,yG[0]
+	call Gotoxy
+	mov eax, Blue + (Black* 16)
+    call SetTextColor
+	mov al, 232
+	call WriteChar
+	
+	mov bl, PriceSpawnx[1]
+	mov bh, PriceSpawny[1]
+
+	mov xG[1], bl
+	mov yG[1], bh
+
+	mov dl,xG[1]
+	mov dh,yG[1]
+	call Gotoxy
+	mov eax, Green + (Black* 16)
+    call SetTextColor
+	mov al, 232
+	call WriteChar
+
+	mov bl, SoapSpawnx[1]
+	mov bh, SoapSpawny[1]
+
+	mov xG[2], bl
+	mov yG[2], bh
+
+	mov dl,xG[2]
+	mov dh,yG[2]
+	call Gotoxy
+	mov eax, Brown + (Black* 16)
+    call SetTextColor
+	mov al, 232
+	call WriteChar
+	ret
+
+GSpawn3:
+	mov bl, GazSpawnx[2]
+	mov bh, GazSpawny[2]
+
+	mov xG[0], bl
+	mov yG[0], bh
+
+	mov dl,xG[0]
+	mov dh,yG[0]
+	call Gotoxy
+	mov eax, Blue + (Black* 16)
+    call SetTextColor
+	mov al, 232
+	call WriteChar
+	
+	mov bl, PriceSpawnx[2]
+	mov bh, PriceSpawny[2]
+
+	mov xG[1], bl
+	mov yG[1], bh
+
+	mov dl,xG[2]
+	mov dh,yG[2]
+	call Gotoxy
+	mov eax, Green + (Black* 16)
+    call SetTextColor
+	mov al, 232
+	call WriteChar
+
+	mov bl, SoapSpawnx[2]
+	mov bh, SoapSpawny[2]
+
+	mov xG[2], bl
+	mov yG[2], bh
+
+	mov dl,xG[2]
+	mov dh,yG[2]
+	call Gotoxy
+	mov eax, Brown + (Black* 16)
+    call SetTextColor
+	mov al, 232
+	call WriteChar
+
+	mov bl, GhostSpawnx[2]
+	mov bh, GhostSpawny[2]
+
+	mov xG[3], bl
+	mov yG[3], bh
+
+	mov dl,xG[3]
+	mov dh,yG[3]
+	call Gotoxy
+	mov eax, Red + (Black* 16)
+    call SetTextColor
+	mov al, 232
+	call WriteChar
+	ret
+
+	ElseSpawnGhost:
+	mov dh,ch
+	mov dl,cl
 	call Gotoxy
 	 mov eax, White + (Black* 16)
     call SetTextColor
