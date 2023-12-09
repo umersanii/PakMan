@@ -1,4 +1,4 @@
-INCLUDE Irvine32.inc
+﻿INCLUDE Irvine32.inc
 includelib Winmm.lib
 
 .data
@@ -14,13 +14,27 @@ UPARROW BYTE 48h
 
 boolWallCollison db 0
 boolmisc db -1
-
+;;;;;;;;sfxx
 aye         db 'aye.wav',0 
 ScoreSound  db 'Food.wav',0
 titleSound  db 'title.wav',0
 lvl1sfx     db 'Lvl1.wav', 0
 lvl2sfx     db 'Lvl2.wav', 0
 lvl3sfx     db 'Lvl3.wav', 0
+lvl1startsfx     db 'lvl1start.wav', 0
+lvl2startsfx     db 'lvl2start.wav', 0
+lvl3startsfx     db 'lvl3start.wav', 0
+namesfx     db 'namepls.wav', 0
+themesfx      db 'theme.wav',0
+
+gg1sfx     db 'lose1.wav', 0
+gg2sfx     db 'lose2.wav', 0
+gg3sfx     db 'lose3.wav', 0
+
+howtoplaysfx db 'howtoplay.wav', 0
+aboutgamesfx db 'aboutgame.wav', 0
+meetcharacterssfx db 'meetcharacters.wav', 0
+
 
 
 
@@ -69,19 +83,32 @@ lvl2complete8 db "                                                              
 lvl2complete9 db "                                                        [E] Next Level      ",0
 
 
-strwiki1 db "Press Arrow Keys To Move",0
-strwiki2 db "Press Arrow Keys To Move",0
-wikir1 db "                                    About Game                                      ",0
-wikir2 db "                                                                                    ",0
-wikir3 db "       The Game is About a Robinhood type character who steals from the rich        ",0
-wikir4 db "                             and gives back to poor                                 ",0
-wikir5 db "                                                                                    ",0
-wikir6 db "                                                                                    ",0
-wikir7 db "                                    How to Play                                     ",0
-wikir8 db "                                                                                    ",0
-wikir9 db "                          [G]ood Luck, Have Fun, Don't Die                          ",0
-wikir10 db "                                                                                   ",0
-wikir11 db "                      [E] TitleScreen              [P] Play                        ",0
+
+wikir1  db "                                  -: ABOUT GAME :-                                  ",0
+wikir2  db "                                                                                    ",0
+wikir3  db "       In 'PakMan' witness the riveting saga where Task Force 141, elite war        ",0
+wikir4  db "       heroes, take a break from global threats to chase pride of Chaklala          ",0
+wikir5  db "       It's the gold heist of the century, with ghosts and soldiers locked          ",0
+wikir6  db "                    in a battle for... well, not world domination.                  ",0
+wikir7  db "                                                                                    ",0
+wikir8  db "                              -:MEET THE CHARACTERS:-                               ",0
+wikir9  db "                  & : Player                          & : Gaz                       ",0
+wikir10 db "                  & : Price                           & : Soap                      ",0
+wikir11 db "						            & :  Ghost                                      ",0
+wikir12 db "                                                                                    ",0
+wikir13 db "                                  -:HOW TO PLAY:-                                   ",0
+wikir14 db "                                                                                    ",0
+wikir15 db "         Use Arrow Keys to Move                                                     ",0
+wikir16 db "         Avoid enemies                                                              ",0
+wikir17 db "         Collect all the gold in all the three maps to secure victory               ",0
+wikir18 db "                                                                                    ",0
+wikir15 db "                          [G]ood Luck, Have Fun, Don't Die                          ",0
+wikir16 db "                                                                                    ",0
+wikir17 db "                      [E] TitleScreen              [P] Play                         ",0
+wikir18 db "                                                                                    ",0
+wikir19 db "                                                                                    ",0
+wikir20 db "                                                               Umer Sani : i222365  ",0
+
 
 
 
@@ -392,7 +419,7 @@ tl3foody9 db 70, 75, 9, 14, 18, 28, 30, 32, 36, 38, 40, 44, 46, 48, 52, 54, 56, 
 tl3foody10 db 75, 9, 14, 18, 32, 34, 36, 38, 40, 44, 46, 48, 50, 52, 66, 70, 75, 9, 14, 18, 28, 42, 56, 66, 70, 75, 5, 6, 7, 9, 12, 13, 14, 15, 16
 tl3foody11 db 18, 42, 66, 68, 69, 70, 71, 72, 75, 77, 78, 79, 5, 6, 7, 9, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 42, 46, 48, 50, 52, 54, 56, 58, 60
 tl3foody12 db 62, 64, 75, 77, 78, 79, 5, 6, 7, 9, 75, 77, 78, 79, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58
-tl3foody13 db 60, 62, 64,
+tl3foody13 db 60, 62, 64, -1
 
 dotscounterlvl3 dw 420
 
@@ -420,19 +447,23 @@ yG db 4 dup(?)
 lastxG db  -1, 1, 0, 0
 lastyG db  0 , 0 , 1, -1
 
-assymptoteLEFT  db   7, 7, 7
-assymptoteUP    db   3, 3, 3
-assymptoteDOWN  db 21, 21, 21
-assymptoteRIGHT db 80, 80, 80
+assymptoteLEFT  db   7, 3, 1
+assymptoteUP    db   3, 3, 1
+assymptoteDOWN  db 21, 21, 23
+assymptoteRIGHT db 80, 80, 84
 
 lvl1GhostRandomMovementy db 11, 11, 11, 6
 lvl1GhostRandomMovementx db 25, 42, 70, 42
 
-lvl2GhostRandomMovementy db 7, 8, 18, 18
-lvl2GhostRandomMovementx db 8, 62, 8, 62
+lvl2GhostRandomMovementy db 6, 14, 18
+lvl2GhostRandomMovementx db 15, 50, 8
+
+
+lvl3GhostRandomMovementy db 6, 25, 35, 84
+lvl3GhostRandomMovementx db 15, 15, 12, 15
 
 boolGSpawn db 0
-tickGhost db 0
+tickGhost db 0, 0, 0, 0
 ;Gaz
 GazSpawnx db 25, 7, 79
 GazSpawny db 10, 23, 23
@@ -459,8 +490,8 @@ stryUI db "& ",0
 score BYTE 0
 
 
-xPos BYTE 10
-yPos BYTE 3
+xPos BYTE 79
+yPos BYTE 23
 
 xG1 db 10
 yG1 db 12
@@ -620,6 +651,8 @@ call SetTextColor
 	level2Food:
 	push Offset l2foodx1 - 1
     push Offset l2foody1 - 1
+	INVOKE PlaySound, OFFSET lvl2startsfx, NULL, 11h
+
 ;	mov cl,l2foodcounter
 
 	jmp DotsLoop
@@ -627,11 +660,14 @@ call SetTextColor
 	level3Food:
 	push Offset l3foodx1 - 1
     push Offset l3foody1 - 1
+	INVOKE PlaySound, OFFSET lvl3startsfx, NULL, 11h
+
 	xor ecx, ecx
 	mov cx, WORD PTR l3foodcounter
 
 
 DotsLoop:
+
 pop eax
 add eax, 1
 
@@ -652,8 +688,15 @@ push ebx
 Loop DotsLoop
 
 ifDots:
+cmp clvl, 2
+je exitdot3
 pop eax
+pop ebx
+
 ret 
+exitdot3:
+pop eax
+ret
 Loop DotsLoop
 
 PrintDots endp
@@ -669,6 +712,9 @@ isFood Proc
 	cmp clvl, 2
 	je Foodlvl2
 
+	cmp clvl, 3
+	je Foodlvl3
+
 	Foodlvl1:
 	mov eax, Offset tfoodx1
 	mov edx, Offset tfoody1
@@ -677,6 +723,11 @@ isFood Proc
 	Foodlvl2:
 	mov eax, Offset tl2foodx1 
 	mov edx, Offset tl2foody1 
+	jmp FoodLoop
+
+	Foodlvl3:
+	mov eax, Offset tl3foodx1 
+	mov edx, Offset tl3foody1 
 	jmp FoodLoop
 
 FoodLoop:
@@ -717,7 +768,7 @@ isFood endp
 isFoodG Proc
 
 
-	   mov esi, 0  
+	mov esi, 0  
 
 	cmp clvl, 1
 	je Food1G
@@ -739,8 +790,8 @@ isFoodG Proc
 	jmp FoodLoopG
 
 	Food3G:
-	mov eax, Offset l3wallx1
-	mov edx, Offset l3wally1 
+	mov eax, Offset tl3foodx1
+	mov edx, Offset tl3foody1 
 	jmp FoodLoopG
 
 
@@ -777,13 +828,14 @@ endFoodG:
 isFoodG endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 makeSquare1 proc
+mov eax, white + (black* 16)
+call SetTextColor
 mov bh, 1
 mov dh, bh
 mov dl, 2
 call gotoxy
 
-mov eax, green+ (black* 16)
-call SetTextColor
+
 mov al, 218
 call writechar
 
@@ -835,7 +887,7 @@ ret
 makeSquare1 endp
 
 makeSquare proc
-mov eax, green+ (black* 16)
+mov eax, blue + (black* 16)
 call SetTextColor
 mov al, 218
 call writechar
@@ -911,12 +963,25 @@ titleScreen endp
 
 wiki proc
 call makeSquare
-mov bh, 4
+call makeSquare1
+
+mov dh, 4
+mov dl, 15
+call gotoxy
+mov eax, white+ (black* 16)
+call SetTextColor	
+mov edx, Offset wikir1
+call writestring
+mov bh, 5
 mov dh, bh
 mov dl, 15
 call gotoxy
-mov ecx, 11
-mov edx, Offset wikir1 - 85
+mov eax, green + (black* 16)
+call SetTextColor	
+mov edx, Offset wikir2 - 85
+
+mov ecx, 6
+
 WikiLoop:
 add edx, 85
 CALL writestring
@@ -927,6 +992,15 @@ mov dl, 15
 call gotoxy
 pop edx
 loop WikiLoop
+
+mov dh, 12
+mov dl, 15
+call gotoxy
+mov eax, white+ (black* 16)
+call SetTextColor	
+mov edx, Offset wikir8
+call writestring
+
 ret
 wiki endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1055,6 +1129,8 @@ endWallG:
     ret
 isWallG endp
 Gameover Proc
+
+
 call makeSquare
 call makeSquare1
 mov bh, 10
@@ -1085,10 +1161,6 @@ mov dl, 30
 call gotoxy
 mov edx, Offset sgameover8
 CALL writestring
-
-
-
-INVOKE PlaySound, OFFSET aye, NULL, 0
 Gameover Endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -1201,9 +1273,9 @@ GhostCollide ENDP
 	call Randomize
 	 mov eax, 3
     call RandomRange
-	mov dl, BYTE PTR lvl2GhostRandomMovementy[eax]
+	mov dl, BYTE PTR lvl2GhostRandomMovementy[edi]
 	mov yG[edi], dl
-	mov dh, BYTE PTR lvl2GhostRandomMovementx[eax]
+	mov dh, BYTE PTR lvl2GhostRandomMovementx[edi]
 	mov xG[edi], dh
 	jmp NormalMove
 	tp3:
@@ -1250,7 +1322,7 @@ GhostCollide ENDP
 	jmp ChangeDirection
 
 	ChangeDirection:
-	mov tickghost, 0
+	mov tickghost[edi], 0
 	call Randomize
 	 mov eax, 3
     call RandomRange
@@ -1298,7 +1370,7 @@ GhostCollide ENDP
 
 
 NormalMove:
-mov al, tickghost
+mov al, tickghost[edi]
 cmp al, 3
 je changedirection
 mov dl, lastyG[edi]
@@ -1320,7 +1392,7 @@ RetGhost:
 	mov dl, yG[edi]
 	mov dh, xG[edi]
     call SpawnGhost
-	inc tickghost
+	inc tickghost[edi]
     ret
 
 	yesyesyes:
@@ -1617,6 +1689,8 @@ lvl02complete endp
 misc proc
 mov esi, 0
 movzx esi, clvl
+mov bx, scorecounter
+
 
 cmp clvl, 1
 je misclvl1
@@ -1627,16 +1701,28 @@ je misclvl2
 cmp clvl, 2
 je misclvl3
 
+
+
 misclvl1:
 mov ax, dotscounterlvl1
+jmp continuemisc
 misclvl2:
 mov ax, dotscounterlvl2
+jmp continuemisc
 
 misclvl3:
 mov ax, dotscounterlvl3
+jmp continuemisc
 
-cmp scorecounter, ax
+continuemisc:
+
+cmp bx, ax
 je lvlcomplete
+
+cmp bx, 190
+je temp
+temp:
+mov dl, 0
 	
 	mov eax, 100
 	call delay
@@ -1672,6 +1758,27 @@ je lvlcomplete
 	ret
 	GG:
 	mov lifecount, 3
+	call randomize
+	mov eax, 3
+	call randomrange
+
+	cmp al, 1
+	je gg1
+
+	cmp al, 2
+	je gg2
+
+	cmp al, 3
+	je gg2
+
+	gg1:
+		INVOKE PlaySound, OFFSET gg1sfx, NULL, 11h
+
+	gg2:
+		INVOKE PlaySound, OFFSET gg2sfx, NULL, 11h
+
+	gg3:
+		INVOKE PlaySound, OFFSET gg3sfx, NULL, 11h
 	call Clrscr
 	call gameover
 	GGread:
@@ -1734,15 +1841,41 @@ je lvlcomplete
 	mov boolmisc, 1
 	ret
 
+
 misc endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+sfxstart proc
+cmp clvl, 1
+je sfxstart1
+
+cmp clvl, 2
+je sfxstart2
+
+cmp clvl, 3
+je sfxstart3
+ret
+
+sfxstart1:
+	INVOKE PlaySound, OFFSET lvl1startsfx, NULL, 11h
+	ret
+
+sfxstart2:
+	INVOKE PlaySound, OFFSET lvl2startsfx, NULL, 11h
+	ret
+sfxstart3:
+	INVOKE PlaySound, OFFSET lvl3startsfx, NULL, 11h
+	ret
+
+sfxstart endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 main PROC
+call wiki
+call readchar
 
-mov clvl, 2
-jmp play
+
 titleContinue1:
+
 call Clrscr
 call titleScreen
 call readchar
@@ -1769,7 +1902,9 @@ cmp al, 'p'
 je play
 jmp wikiHome1
 play:
+INVOKE PlaySound, OFFSET themesfx, NULL, 11h
 
+	call sfxstart
     call Clrscr
 	call PrintBoard
 	call PrintDots
@@ -1814,58 +1949,62 @@ je GMovelvl3
 GMovelvl1:
 mov ch, xG[0]
 mov cl, yG[0]
-cmp GhostSpeedTick, 1
 mov edi, 0
+cmp GhostSpeedTick[edi], 2
 call GMoveMove
 ret
 
 GMovelvl2:
 mov ch, xG[0]
 mov cl, yG[0]
-cmp GhostSpeedTick, 1
 mov edi, 0
-call GhostMoveP1
+cmp GhostSpeedTick[edi], 2
+call GMoveMove
 
 mov ch, xG[1]
 mov cl, yG[1]
-cmp GhostSpeedTick, 1
 mov edi, 1
-call GhostMoveP1
+cmp GhostSpeedTick[edi], 2
+call GMoveMove
 
 mov ch, xG[2]
 mov cl, yG[2]
-cmp GhostSpeedTick, 1
 mov edi, 2
-call GhostMoveP1
+cmp GhostSpeedTick[edi], 2
+call GMoveMove
+
 
 
 
 ret
 GMovelvl3:
+mov bl, 2
 mov ch, xG[0]
 mov cl, yG[0]
-cmp GhostSpeedTick, 1
 mov edi, 0
+cmp GhostSpeedTick[edi], 1
 call GhostMoveP1
 
 mov ch, xG[1]
 mov cl, yG[1]
-cmp GhostSpeedTick, 1
 mov edi, 1
+cmp GhostSpeedTick[edi], 1
 call GhostMoveP1
 
 mov ch, xG[2]
 mov cl, yG[2]
-cmp GhostSpeedTick, 1
+cmp GhostSpeedTick[edi], 1
 mov edi, 2
 call GhostMoveP1
 
 mov ch, xG[3]
 mov cl, yG[3]
-cmp GhostSpeedTick, 1
+cmp GhostSpeedTick[edi], 1
 mov edi, 3
 call GhostMoveP1
 ret
+
+
 
 GhostMove endp
 
@@ -1912,7 +2051,10 @@ UpdateGhost PROC
 	call isWallG
 	cmp boolisWall, 1
 	je WallinUpdate
+
 	
+	
+
 	mov boolisFood, 0
 	call isFoodG
 	cmp boolisFood, 1
@@ -2078,12 +2220,53 @@ GSpawn3:
 	ret
 
 	ElseSpawnGhost:
+
+	cmp edi, 0
+	je GazUpdate
+
+	cmp edi, 1
+	je PriceUpdate
+
+	cmp edi, 2
+	je SoapUpdate
+
+	cmp edi, 3
+	je GhostUpdate
+
+	GazUpdate:
+	mov eax, lightcyan + (Black* 16)
+    call SetTextColor
+	mov al, 153
+	jmp continueSpawn
+
+	PriceUpdate:
+	mov eax, Green + (Black* 16)
+    call SetTextColor
+	mov al, 232
+
+	jmp continueSpawn
+
+
+	SoapUpdate:
+	mov eax, lightblue + (Black* 16)
+    call SetTextColor
+	mov al, 237
+
+	jmp continueSpawn
+
+
+	GhostUpdate:
+	mov eax, lightRed + (Black* 16)
+    call SetTextColor
+	mov al, 234
+
+	jmp continueSpawn
+
+
+	continueSpawn:
 	mov dh,ch
 	mov dl,cl
 	call Gotoxy
-	 mov eax, White + (Black* 16)
-    call SetTextColor
-	mov al, 232
 	call WriteChar
 	ret
 SpawnGhost ENDP
