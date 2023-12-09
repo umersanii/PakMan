@@ -24,8 +24,7 @@ lvl3sfx     db 'Lvl3.wav', 0
 
 
 
-lvl1GhostRandomMovementy db 11, 11, 11, 6
-lvl1GhostRandomMovementx db 25, 42, 70, 42
+
 
 
 strtitle0 db "                                who needs a pacman, when you have         ",0
@@ -302,7 +301,7 @@ tl2foodx2 db 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8
 tl2foodx3 db 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 14
 tl2foodx4 db 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16
 tl2foodx5 db 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 18, 18, 18
-tl2foodx6 db 18, 18, 18, 18, 18, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 21, 21, 21, 21,
+tl2foodx6 db 18, 18, 18, 18, 18, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 21, 21, 21, 21, -1
 
 
 ;;;;;;;;;;;;;;;;;;;;;lvl 3
@@ -395,7 +394,7 @@ tl3foody11 db 18, 42, 66, 68, 69, 70, 71, 72, 75, 77, 78, 79, 5, 6, 7, 9, 20, 22
 tl3foody12 db 62, 64, 75, 77, 78, 79, 5, 6, 7, 9, 75, 77, 78, 79, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58
 tl3foody13 db 60, 62, 64,
 
-foodcount word 190, 208, 420
+dotscounterlvl3 dw 420
 
 foodcountlv1 db 190
 brickcountlv1 db 174
@@ -421,15 +420,21 @@ yG db 4 dup(?)
 lastxG db  -1, 1, 0, 0
 lastyG db  0 , 0 , 1, -1
 
-assymptoteLEFT db 7, 3, 21
-assymptoteUP db 3, 3, 21
-assymptoteDOWN db 21, 3, 21
-assymptoteRIGHT db 80, 3, 21
+assymptoteLEFT  db   7, 7, 7
+assymptoteUP    db   3, 3, 3
+assymptoteDOWN  db 21, 21, 21
+assymptoteRIGHT db 80, 80, 80
+
+lvl1GhostRandomMovementy db 11, 11, 11, 6
+lvl1GhostRandomMovementx db 25, 42, 70, 42
+
+lvl2GhostRandomMovementy db 7, 8, 18, 18
+lvl2GhostRandomMovementx db 8, 62, 8, 62
 
 boolGSpawn db 0
 tickGhost db 0
 ;Gaz
-GazSpawnx db 25, 79, 79
+GazSpawnx db 25, 7, 79
 GazSpawny db 10, 23, 23
 
 ;Price
@@ -648,7 +653,6 @@ Loop DotsLoop
 
 ifDots:
 pop eax
-pop eax
 ret 
 Loop DotsLoop
 
@@ -713,47 +717,58 @@ isFood endp
 isFoodG Proc
 
 
+	   mov esi, 0  
+
 	cmp clvl, 1
-	je Foodlvl1G
+	je Food1G
 
 	cmp clvl, 2
-	je Foodlvl2G
+	je Food2G
 
-	Foodlvl1G:
-	mov eax, Offset tfoodx1
-	mov edx, Offset tfoody1
+	cmp clvl, 3
+	je Food3G
+
+	Food1G:
+	mov eax, Offset tfoodx1 
+	mov edx, Offset tfoody1 
 	jmp FoodLoopG
 	
-	Foodlvl2G:
+	Food2G:
 	mov eax, Offset tl2foodx1 
 	mov edx, Offset tl2foody1 
 	jmp FoodLoopG
 
+	Food3G:
+	mov eax, Offset l3wallx1
+	mov edx, Offset l3wally1 
+	jmp FoodLoopG
+
+
 FoodLoopG:
-
-	mov bl, [eax]
-    cmp bl, -1
-    je  endFoodG      
-
-    cmp ch, bl
-
-    je  ifFoodG
-continueFoodG:
+	mov bh, [eax]
+    cmp bh, -1
+    je  endFoodG   
 	add eax, 1
+    cmp ch, bh
+    je  ifFoodG
 	add edx, 1
+
+continueFoodG:
+
     jmp FoodLoopG
 
 ifFoodG:
     mov bl, [edx]
-	;dec bl
-    cmp bl, cl
+	add edx, 1
+
+	
+    cmp cl, bl
 
     je  elseifFoodG
     jmp continueFoodG
 
 elseifFoodG:
-    mov boolisFood, 1
-	;INVOKE PlaySound, OFFSET ScoreSound, NULL, 11h
+	    mov boolisFood, 1
 
     jmp endFoodG
 
@@ -1163,6 +1178,16 @@ GhostCollide ENDP
 	jmp NormalMove
 
 	tp:
+	cmp clvl, 1
+	je tp1
+
+	cmp clvl, 2
+	je tp2
+
+	cmp clvl, 3
+	je tp3
+
+	tp1:
 	call Randomize
 	 mov eax, 3
     call RandomRange
@@ -1171,6 +1196,18 @@ GhostCollide ENDP
 	mov dh, BYTE PTR lvl1GhostRandomMovementx[eax]
 	mov xG[edi], dh
 	jmp NormalMove
+
+	tp2:
+	call Randomize
+	 mov eax, 3
+    call RandomRange
+	mov dl, BYTE PTR lvl2GhostRandomMovementy[eax]
+	mov yG[edi], dl
+	mov dh, BYTE PTR lvl2GhostRandomMovementx[eax]
+	mov xG[edi], dh
+	jmp NormalMove
+	tp3:
+
 
 	ResetDirection:
 	
@@ -1593,10 +1630,10 @@ je misclvl3
 misclvl1:
 mov ax, dotscounterlvl1
 misclvl2:
-mov ax, dotscounterlvl1
+mov ax, dotscounterlvl2
 
 misclvl3:
-mov ax, dotscounterlvl1
+mov ax, dotscounterlvl3
 
 cmp scorecounter, ax
 je lvlcomplete
@@ -1703,7 +1740,7 @@ misc endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 main PROC
 
-mov clvl, 1
+mov clvl, 2
 jmp play
 titleContinue1:
 call Clrscr
@@ -1783,23 +1820,54 @@ call GMoveMove
 ret
 
 GMovelvl2:
+mov ch, xG[0]
+mov cl, yG[0]
 cmp GhostSpeedTick, 1
-call GMoveMove
+mov edi, 0
+call GhostMoveP1
 
-cmp GhostSpeedTick, 2
-call GMoveMove
+mov ch, xG[1]
+mov cl, yG[1]
+cmp GhostSpeedTick, 1
+mov edi, 1
+call GhostMoveP1
+
+mov ch, xG[2]
+mov cl, yG[2]
+cmp GhostSpeedTick, 1
+mov edi, 2
+call GhostMoveP1
+
+
+
 ret
 GMovelvl3:
+mov ch, xG[0]
+mov cl, yG[0]
 cmp GhostSpeedTick, 1
-call GMoveMove
+mov edi, 0
+call GhostMoveP1
 
-cmp GhostSpeedTick, 2
-call GMoveMove
+mov ch, xG[1]
+mov cl, yG[1]
+cmp GhostSpeedTick, 1
+mov edi, 1
+call GhostMoveP1
 
-cmp GhostSpeedTick, 3
-call GMoveMove
+mov ch, xG[2]
+mov cl, yG[2]
+cmp GhostSpeedTick, 1
+mov edi, 2
+call GhostMoveP1
+
+mov ch, xG[3]
+mov cl, yG[3]
+cmp GhostSpeedTick, 1
+mov edi, 3
+call GhostMoveP1
+ret
+
 GhostMove endp
-
 
 GMoveMove proc
 GMoveP1:
