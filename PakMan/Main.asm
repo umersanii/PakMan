@@ -1,3 +1,8 @@
+;
+;								MUHAMMAD UMER
+;								i222365
+;
+;
 INCLUDE Irvine32.inc
 includelib Winmm.lib
 
@@ -11,7 +16,7 @@ DOWNARROW BYTE 50h
 LEFTARROW BYTE 4Bh
 RIGHTARROW BYTE 4Dh
 UPARROW BYTE 48h
-
+boolgl db 0
 boolWallCollison db 0
 boolmisc db -1
 ;;;;;;;;sfxx
@@ -20,12 +25,14 @@ ScoreSound  db 'sfx/food.wav',0
 titleSound  db 'sfx/title.wav',0
 lvl1sfx     db 'sfx/Lvl1.wav', 0
 lvl2sfx     db 'sfx/Lvl2.wav', 0
-lvl3sfx     db 'sfx/Lvl3.wav', 0
+lvl3sfx     db 'sfx/win.wav', 0
+lvl31sfx     db 'sfx/win1.wav', 0
+
 lvl1startsfx     db 'sfx/lvl1start.wav', 0
 lvl2startsfx     db 'sfx/lvl2start.wav', 0
 lvl3startsfx     db 'sfx/lvl3start.wav', 0
 namesfx     db 'sfx/namepls.wav', 0
-themesfx      db 'sfx/theme.wav',0
+ost     db 'sfx/theme.wav',0
 
 gg1sfx     db 'sfx/lose1.wav', 0
 gg2sfx     db 'sfx/lose2.wav', 0
@@ -35,10 +42,19 @@ playsfx db 'sfx/howtoplay.wav', 0
 aboutgamesfx db 'sfx/aboutgame.wav', 0
 meetcharacterssfx db 'sfx/meetcharacters.wav', 0
 
+siuuu db 'sfx/siuuu.wav', 0
+moye1 db 'sfx/moyemoye.wav', 0
 
 
-
-
+gl1 db "   ____                 _   _               _     ",0
+gl2 db "  / ___| ___   ___   __| | | |   _   _  ___| | __ ",0
+gl3 db " | |  _ / _ \ / _ \ / _` | | |  | | | |/ __| |/ / ",0
+gl4 db " | |_| | (_) | (_) | (_| | | |__| |_| | (__|   <  ",0
+gl5 db "  \____|\___/ \___/ \__,_| |_____\__,_|\___|_|\_\ ",0
+gl6 db "   / \   ___| |_(_)_   ____ _| |_ ___  __| | | |  ",0
+gl7 db "  / _ \ / __| __| \ \ / / _` | __/ _ \/ _` | | |  ",0
+gl8 db " / ___ \ (__| |_| |\ V / (_| | ||  __/ (_| | |_|  ",0
+gl9 db "/_/   \_\___|\__|_| \_/ \__,_|\__\___|\__,_| (_)  ",0
 
 
 strtitle0 db "                                who needs a pacman, when you have         ",0
@@ -92,7 +108,7 @@ victroy6 db "                               |___/          ",0
 victroy7 db "                                              ",0
 victroy8 db"               Your Score :                    ",0
 victroy10 db "                                              ",0
-victroy9 db "                          [E] Next Level      ",0
+victroy9 db "                          [E] Title Screen      ",0
 
 
 
@@ -342,6 +358,7 @@ tl2foodx4 db 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 15, 15,
 tl2foodx5 db 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 18, 18, 18
 tl2foodx6 db 18, 18, 18, 18, 18, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 21, 21, 21, 21, -1
 
+boolgoodluck db 0
 
 ;;;;;;;;;;;;;;;;;;;;;lvl 3
 
@@ -433,7 +450,31 @@ tl3foody11 db 18, 42, 66, 68, 69, 70, 71, 72, 75, 77, 78, 79, 5, 6, 7, 9, 20, 22
 tl3foody12 db 62, 64, 75, 77, 78, 79, 5, 6, 7, 9, 75, 77, 78, 79, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58
 tl3foody13 db 60, 62, 64, -1
 
-dotscounterlvl3 dw 420
+dotscounterlvl3 dw 423
+
+spfood db 3, 5, 7
+
+lvl1SpecialFruitsx db 5 , 40, 80, -1
+lvl1SpecialFruitsy db 6, 12, 1,  -1
+
+
+lvl2SpecialFruitsx db 2 , 79, 41, 41, -1
+lvl2SpecialFruitsy db 11, 11, 4,  21, -1
+
+
+lvl3SpecialFruitsx db 2 , 82, 42, 42, 1, 1, -1
+lvl3SpecialFruitsy db 11, 11, 5,  19, 1, 20, -1
+
+tlvl1SpecialFruitsx db 5 , 40, 80, -1
+tlvl1SpecialFruitsy db 6, 12, 1,  -1
+
+
+tlvl2SpecialFruitsx db 2 , 79, 41, 41, -1
+tlvl2SpecialFruitsy db 11, 11, 4,  21, -1
+
+
+tlvl3SpecialFruitsx db 2 , 82, 42, 42, 1, 1, -1
+tlvl3SpecialFruitsy db 11, 11, 5,  19, 1, 20, -1
 
 foodcountlv1 db 190
 brickcountlv1 db 174
@@ -654,10 +695,71 @@ ret
 exitdot3:
 pop eax
 ret
-Loop DotsLoop
 
 PrintDots endp
+;;;;;;;;;;;;;;;;;;
+isSFood Proc
+    mov ch, xpos
+    mov cl, ypos
 
+	cmp clvl, 1
+	je sFoodlvl1
+
+	cmp clvl, 2
+	je sFoodlvl2
+
+	cmp clvl, 3
+	je sFoodlvl3
+
+	sFoodlvl1:
+	mov eax, Offset tlvl1SpecialFruitsx
+	mov edx, Offset tlvl1SpecialFruitsy
+	jmp sFoodLoop
+	
+	sFoodlvl2:
+	mov eax, Offset tlvl2SpecialFruitsx 
+	mov edx, Offset tlvl2SpecialFruitsy
+	jmp sFoodLoop
+
+	sFoodlvl3:
+	mov eax, Offset tlvl3SpecialFruitsx
+	mov edx, Offset tlvl3SpecialFruitsy
+	jmp sFoodLoop
+
+sFoodLoop:
+
+	mov bl, [eax]
+    cmp bl, -1
+    je  sendFood      
+
+    cmp ch, bl
+
+    je  sifFood
+scontinueFood:
+	add eax, 1
+	add edx, 1
+    jmp sFoodLoop
+
+sifFood:
+    mov bl, [edx]
+	;dec bl
+    cmp bl, cl
+
+    je  selseifFood
+    jmp scontinueFood
+
+selseifFood:
+    add scorecounter, 5
+	mov bl, -2
+	mov [edx], bl
+	mov [eax], bl
+	INVOKE PlaySound, OFFSET ScoreSound, NULL, 11h
+
+    jmp sendFood	
+
+sendFood:
+    ret
+issFood endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 isFood Proc
     mov ch, xpos
@@ -844,7 +946,7 @@ ret
 makeSquare1 endp
 
 makeSquare proc
-mov eax, blue + (black* 16)
+mov eax, yellow + (black* 16)
 call SetTextColor
 mov al, 218
 call writechar
@@ -940,13 +1042,22 @@ call gotoxy
 mov al, "E"
 call writechar
 
-mov bh, 70
+
+
+mov bh, 28
 mov dh, bh
-mov dl, 70
+mov dl, 20
 call gotoxy
+mov edx, offset wikir20
+call writestring
+
+call removecursor
+
 INVOKE PlaySound, OFFSET titleSound, NULL, 0
 mov eax, 50
 call delay
+INVOKE PlaySound, OFFSET ost, NULL, 11h
+
 ret
 titleScreen endp
 
@@ -1062,6 +1173,8 @@ call SetTextColor
 mov al, 234
 call writechar
 
+call removecursor
+
 INVOKE PlaySound, OFFSET meetcharacterssfx, NULL, 0
 mov eax, 1200
 call delay
@@ -1107,6 +1220,17 @@ call gotoxy
 
 mov al, "E"
 call writechar
+
+mov bh, 21
+mov dh, bh
+mov dl, 42
+call gotoxy
+mov al, "G"
+call writechar
+
+
+call removecursor
+
 
 mov eax, 50
 call delay
@@ -1292,7 +1416,11 @@ mov dl, 64
 call gotoxy
 mov al, "E"
 CALL writechar
+mov eax, 50
+call delay
 
+INVOKE PlaySound, OFFSET moye1, NULL, 0
+ret
 
 Gameover Endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1309,6 +1437,8 @@ ResetPac endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 GhostCollide PROC
+cmp boolgoodluck, 1
+je gr
 mov esi, 0
 cmp clvl, 1
 je GhostCollidelvl1
@@ -1349,12 +1479,14 @@ je DecLife
 cmp ecx, 0
 jne GhostCollideLoop
 ret
+
+
 DecLife:
 dec lifecount
 INVOKE PlaySound, OFFSET aye, NULL, 0
 call ResetPac
 
-
+gr:
 ret
 GhostCollide ENDP
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1544,9 +1676,7 @@ GhostMoveP1 Endp
 ;;;;;;;;;;;;;;;;;;;
 
 PacMove Proc
-	mov dl, xPos
-	mov dh, yPos
-	CALL GoToXY
+	
 	mov eax, 0
 	push edx
 	CALL ReadKey	
@@ -1613,8 +1743,6 @@ PacMove Proc
 		inc yPos
 		inc dh
 		mov boolisWall, 0
-		mov eax, Offset wallx1 - 1
-		mov edx, Offset wally1 - 1 
 		mov bh, ypos
 		mov ch, xpos
 		call isWall
@@ -1681,6 +1809,7 @@ PacMove Proc
 		CALL GoToXY
 		CALL UpdatePlayer
 
+
 		inc dl
 		ADD xPos, 1
 		mov eax, Offset wallx1 - 1
@@ -1698,6 +1827,8 @@ PacMove Proc
 		mov lastposy, 0
 		mov lastposx, 1
 		call DrawPlayer
+		call removecursor
+
 		ret
 	DeltaRightBack:
 		dec xPos
@@ -1712,6 +1843,8 @@ PacMove Proc
 		mov dh, yPos
 		CALL GoToXY
 		CALL UpdatePlayer
+		call removecursor
+
 		cmp boolLastMove, 1
 		je LastMoveWasUp
 		cmp boolLastMove, 2
@@ -1760,6 +1893,8 @@ PacMove Proc
 		mov dh, yPos
 		CALL GoToXY
 		call DrawPlayer		
+		call removecursor
+
 		ret
 
 
@@ -1870,6 +2005,7 @@ ret
 lvl02complete endp
 ;;;;;;;;;;;;;;;;;;;;;;;
 lvl03complete proc
+mov boolgoodluck, 0
 call makeSquare
 call makeSquare1
 
@@ -1906,7 +2042,6 @@ call gotoxy
 
 mov eax, white+ (black* 16)
 call SetTextColor
-xor eax, eax
 
 mov ax, scorecounter
 call writedec
@@ -1919,9 +2054,73 @@ call writestring
 
 mov eax, 500
 call delay
+call randomize
+mov eax, 1
+call randomrange
+cmp al, 0
+je lvl03complete1
+cmp al, 1
+je lvl03complete2
+
+lvl03complete1:
+INVOKE PlaySound, OFFSET lvl31sfx, NULL, 0
+ret
+
+lvl03complete2:
 INVOKE PlaySound, OFFSET lvl3sfx, NULL, 0
 ret
 lvl03complete endp
+
+copyarray proc
+mov eax,offset lvl3SpecialFruitsx
+mov ebx,offset lvl3SpecialFruitsy
+mov esi, 0
+loopc1:
+mov dl, [eax]
+mov dh, [ebx]
+cmp dl, -1
+je loop1out
+mov tlvl3SpecialFruitsx[esi], dl
+mov tlvl3SpecialFruitsy[esi], dh
+add eax, 1
+add ebx, 1
+inc esi
+jmp loopc1
+loop1out:
+mov eax,offset lvl2SpecialFruitsx
+mov ebx,offset lvl2SpecialFruitsy
+mov esi, 0
+loopc2:
+
+mov dl, [eax]
+mov dh, [ebx]
+cmp dl, -1
+
+je loop2out
+mov tlvl2SpecialFruitsx[esi], dl
+mov tlvl2SpecialFruitsy[esi], dh
+add eax, 1
+add ebx, 1
+inc esi
+jmp loopc2
+loop2out:
+mov eax,offset lvl1SpecialFruitsx
+mov ebx,offset lvl1SpecialFruitsy
+mov esi, 0
+loopc3:
+mov dl, [eax]
+mov dh, [ebx]
+cmp dl, -1
+je loop3out
+mov tlvl1SpecialFruitsx[esi], dl
+mov tlvl1SpecialFruitsy[esi], dh
+add eax, 1
+add ebx, 1
+inc esi
+jmp loopc3
+loop3out:
+ret
+copyarray endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 misc proc
 mov esi, 0
@@ -1935,7 +2134,7 @@ je misclvl1
 cmp clvl, 2
 je misclvl2
 
-cmp clvl, 2
+cmp clvl, 3
 je misclvl3
 
 
@@ -1957,12 +2156,19 @@ jmp continuemisc
 
 continuemisc:
 
+
+
 cmp bx, ax
 je lvlcomplete
-
-	
+cmp bx, 818
+je temp
+jmp tmep1
+temp:
+	mov bx, 818
+tmep1:
 	mov eax, 100
 	call delay
+	
 	mov dl, 0
 	mov dh, 25
 	call gotoxy
@@ -1994,7 +2200,7 @@ je lvlcomplete
 	loop HeartLoop
 	ret
 	GG:
-	mov lifecount, 3
+	
 	mov eax, 100
 	call delay
 	call randomize
@@ -2008,19 +2214,36 @@ je lvlcomplete
 	je gg2
 
 	cmp al, 3
-	je gg2
+	je gg3
 
 	gg1:
-		INVOKE PlaySound, OFFSET gg1sfx, NULL, 11h
+	mov eax, 50
+	call delay
+		INVOKE PlaySound, OFFSET gg1sfx, NULL, 0
+		jmp ggok
 
 	gg2:
-		INVOKE PlaySound, OFFSET gg2sfx, NULL, 11h
+	mov eax, 50
+	call delay
+		INVOKE PlaySound, OFFSET gg2sfx, NULL, 0
+		jmp ggok
+
 
 	gg3:
-		INVOKE PlaySound, OFFSET gg3sfx, NULL, 11h
+	mov eax, 50
+	call delay
+		INVOKE PlaySound, OFFSET gg3sfx, NULL, 0
+		jmp ggok
+		 ggok:
+
 	call Clrscr
 	call gameover
+	mov lifecount, 3
+	mov clvl, 1
+	mov scorecounter, 0
+	call copyarray
 	GGread:
+	call removecursor
     call readchar
 	cmp al, 'q'
 	je titleContinue
@@ -2033,7 +2256,13 @@ je lvlcomplete
 	jmp GGread
 
 	LvlComplete:
+	call resetpac
+	mov eax, 50
+	call delay
+	invoke PlaySound, OFFSET siuuu, NULL, 0
+
 	call Clrscr
+
 	cmp clvl, 1
 	je lvl01
 	
@@ -2047,18 +2276,15 @@ je lvlcomplete
 
 	lvl01:
 	call lvl01complete
-	;INVOKE PlaySound, OFFSET lvl1sfx, NULL, 11h
 	jmp continueLvlComplete
 
 
 	lvl02:
 	call lvl02complete
-	INVOKE PlaySound, OFFSET lvl2sfx, NULL, 11h
 	jmp continueLvlComplete
 
 	lvl03:
 	call lvl03complete
-	INVOKE PlaySound, OFFSET lvl3sfx, NULL, 11h
 
 	jmp continueLvlComplete
 
@@ -2099,20 +2325,191 @@ je sfxstart3
 ret
 
 sfxstart1:
-
-	INVOKE PlaySound, OFFSET lvl1startsfx, NULL, 11h
+	mov eax, 50
+call delay
+	INVOKE PlaySound, OFFSET lvl1startsfx, NULL, 0
 	ret
 
 sfxstart2:
-	INVOKE PlaySound, OFFSET lvl2startsfx, NULL, 11h
+	INVOKE PlaySound, OFFSET lvl2startsfx, NULL, 0
 	ret
 sfxstart3:
-	INVOKE PlaySound, OFFSET lvl3startsfx, NULL, 11h
+	INVOKE PlaySound, OFFSET lvl3startsfx, NULL, 0
 	ret
 
 sfxstart endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+SpecialFruits proc
+call randomize
+mov eax, 3
+call randomrange
+cmp al, 0
+je retspecialfruits
+
+cmp al, 1
+je retspecialfruits
+
+call randomize
+mov eax, 10
+call randomrange
+
+cmp al, 0
+je color1
+
+cmp al, 1
+je color2
+
+cmp al, 2
+je color3
+
+cmp al, 3
+je color4
+
+cmp al, 4
+je color5
+
+cmp al, 5
+je color6
+
+cmp al, 6
+je color7
+
+cmp al, 7
+je color8
+
+cmp al, 8
+je color9
+
+cmp al, 9
+je color10
+
+color1:
+    mov eax, magenta + (Black * 16)
+    call SetTextColor
+    jmp conitnuesp
+
+color2:
+    mov eax, red + (Black * 16)
+    call SetTextColor
+    jmp conitnuesp
+
+color3:
+    mov eax, cyan + (Black * 16)
+    call SetTextColor
+    jmp conitnuesp
+
+color4:
+    mov eax, blue + (Black * 16)
+    call SetTextColor
+    jmp conitnuesp
+
+color5:
+    mov eax, gray + (Black * 16)
+    call SetTextColor
+    jmp conitnuesp
+
+color6:
+    mov eax, green + (Black * 16)
+    call SetTextColor
+    jmp conitnuesp
+
+color7:
+    mov eax, yellow + (Black * 16)
+    call SetTextColor
+    jmp conitnuesp
+
+color8:
+    mov eax, white + (Black * 16)
+    call SetTextColor
+    jmp conitnuesp
+
+color9:
+    mov eax, lightred + (Black * 16)
+    call SetTextColor
+    jmp conitnuesp
+
+color10:
+    mov eax, lightblue + (Black * 16)
+    call SetTextColor
+    jmp conitnuesp
+
+
+
+	conitnuesp:
+cmp clvl, 1
+je SpecialFruits1
+
+cmp clvl, 2
+je SpecialFruits2
+
+cmp clvl, 3
+je SpecialFruits3
+
+specialFruits1:
+mov ebx, offset tlvl1SpecialFruitsx
+mov ecx, offset tlvl1SpecialFruitsy
+jmp SpecialFruitsLoop
+
+specialfruits2:
+mov ebx, offset tlvl2SpecialFruitsx
+mov ecx, offset tlvl2SpecialFruitsy
+jmp SpecialFruitsLoop
+
+specialfruits3:
+mov ebx, offset tlvl3SpecialFruitsx
+mov ecx, offset tlvl3SpecialFruitsy
+jmp SpecialFruitsLoop
+
+SpecialFruitsLoop:
+mov dl, [ebx]
+
+cmp dl, -1
+je retspecialfruits
+
+mov dh, [ecx]
+
+call gotoxy
+inc ebx
+inc ecx
+mov al, 248
+call writechar
+jmp SpecialFruitsLoop
+
+retspecialfruits:
+ret
+specialFruits endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+goodluckscreen proc
+call makeSquare
+call makeSquare1
+mov eax, yellow + (black* 16)
+	call SetTextColor
+	mov bh, 9
+mov dh, bh
+mov dl, 32
+call gotoxy
+mov edx, Offset gl1 - 51
+mov ecx, 9
+glLoop:
+add edx, 51
+CALL writestring
+push edx
+inc bh
+mov dh, bh
+mov dl, 32
+call gotoxy
+pop edx
+loop glLoop
+call removecursor
+
+mov eax, 50
+call delay
+invoke PlaySound, OFFSET ost, NULL, 0
+
+ret
+goodluckscreen endp
+;;;;;;;;;;;;;;;;;
 main PROC
 
 titleContinue1:
@@ -2141,22 +2538,34 @@ cmp al, 'E'
 je play
 cmp al, 'e'
 je play
+cmp al, 'g'
+je goodluck
+cmp al, 'G'
+je goodluck
 jmp wikiHome1
+goodluck:
+mov boolgoodluck, 1
+call Clrscr
+call goodluckscreen
+
 play:
 
-	call sfxstart
     call Clrscr
 	call PrintBoard
 	call PrintDots
-
 	call PrintxUI
 	
     
 	call DrawPlayer
+
 	mov boolGSpawn, 1
 	call SpawnGhost
 	mov boolGSpawn, 0
+	call sfxstart
+
 	gameLoop:
+	;call SpecialFruits
+	call removecursor
 	mov eax, 50
 	call delay
 	mov boolmisc, -1
@@ -2167,15 +2576,22 @@ play:
 	je wikiHome1
 	cmp boolmisc, 2
 	je play
+	call PacMove
+	;call issFood
+	call GhostCollide
 	call GhostMove
 
-	call PacMove
-	call GhostCollide
 	loop gameloop
 	
 	
 main ENDP
 
+removecursor proc
+mov dl, 118
+mov dh, 29
+call gotoxy
+ret
+removecursor endp
 GhostMove proc
 cmp clvl, 1
 je GMovelvl1
